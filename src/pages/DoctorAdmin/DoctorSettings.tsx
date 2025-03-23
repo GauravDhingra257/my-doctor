@@ -3,6 +3,7 @@ import { Camera, Check, Info, Lock, Eye, EyeOff, Plus, Pencil } from 'lucide-rea
 import { useNavigate } from 'react-router-dom';
 import { doctorProfileApi } from '../../Api';
 import { form } from '@heroui/react';
+import MedicineAndLabs from './MedicineAndLabs';
 
 const DoctorSettings = () => {
   const navigate = useNavigate();
@@ -129,6 +130,12 @@ const DoctorSettings = () => {
                   className={`text-left px-4 py-2 rounded ${activeTab === 'profile' ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-50'}`}
                 >
                   Profile Information
+                </button>
+                <button
+                  onClick={() => handleTabClick('medicineAndLabs')}
+                  className={`text-left px-4 py-2 rounded ${activeTab === 'medicineAndLabs' ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-50'}`}
+                >
+                  Medicine and Labs
                 </button>
                 <button
                   onClick={() => handleTabClick('subscription')}
@@ -866,6 +873,17 @@ const DoctorSettings = () => {
                     </form>
                   </div>
 
+                </div>
+              </div>
+            )}
+                        {/* medicineAndLabs Tab */}
+            {activeTab === 'medicineAndLabs' && (
+              <div className="bg-white rounded-lg shadow-sm border">
+                <div className="p-6 border-b border-gray-200">
+                  <h2 className="text-lg font-medium text-gray-800">Medicine and Labs</h2>
+                </div>
+                <div className="p-6">
+                  <MedicineAndLabs />
                 </div>
               </div>
             )}
