@@ -1,0 +1,2989 @@
+{
+	"info": {
+		"_postman_id": "060ad817-3104-4f9b-83ec-84a9b1cb7dd5",
+		"name": "AD Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "user login",
+					"item": [
+						{
+							"name": "http://127.0.0.1:8000/auth/user/",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "ZIMjpmHoIOMVgc2HIQc9j0ZY5LTMJpOi",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"mobile_number\":8448558621,\n    \"user_type\":1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/auth/user/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"auth",
+										"user",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:8000/auth/user/",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Session-Id",
+										"value": "yzq4n09r8tma6zv3avd4j8129qn8gh5d"
+									},
+									{
+										"key": "X-CSRFToken",
+										"value": "VhRyZbXBu7kYjl6TYuMu00Eu0np2dYzP"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"value": "csrftoken=FV4OIZkgIfyIz1dMZGQP6is6idfvODTZ; sessionid=1soptx3ni7dp3tfjaru3dv2wmg72dgn2"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"mobile_number\":8448558621,\n    \"otp_entered\":\"466718\"\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/auth/user/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"auth",
+										"user",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:8000/send-otp/",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4NDEyNDQxLCJpYXQiOjE3MzA2MzY0NDEsImp0aSI6IjMwYjcxMzg0ODI0MDQ5Y2U5YzYyMjkyOTc1ZTBkMDE1IiwidXNlcl9pZCI6ImFkOGUxMmQxLTg2ZGQtNDUwMy1iZGQ0LTcwZTJhNzZkYzFlMyIsImlkIjoiYWQ4ZTEyZDEtODZkZC00NTAzLWJkZDQtNzBlMmE3NmRjMWUzIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MjEiLCJ1c2VyX3R5cGUiOjF9.oU7pi8-t9c0XhgZLxq0QB-eU30Neod5hYomrbyzWnz0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Session-Id",
+										"value": "yzq4n09r8tma6zv3avd4j8129qn8gh5d",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-CSRFToken",
+										"value": "N0N5lm4NH9UpE7laf9xrDbFeBLl4OE9H",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"naveen\",\n    \"gender\":\"MALE\",\n    \"pin_code\":\"302021\",\n    \"city\":\"Kumher\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/auth/user/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"auth",
+										"user",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:8000/email-otp-get/",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4NDEyNDQxLCJpYXQiOjE3MzA2MzY0NDEsImp0aSI6IjMwYjcxMzg0ODI0MDQ5Y2U5YzYyMjkyOTc1ZTBkMDE1IiwidXNlcl9pZCI6ImFkOGUxMmQxLTg2ZGQtNDUwMy1iZGQ0LTcwZTJhNzZkYzFlMyIsImlkIjoiYWQ4ZTEyZDEtODZkZC00NTAzLWJkZDQtNzBlMmE3NmRjMWUzIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MjEiLCJ1c2VyX3R5cGUiOjF9.oU7pi8-t9c0XhgZLxq0QB-eU30Neod5hYomrbyzWnz0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "RHYM9WquzGpJnBGZVmYz1Cr0OxexKY2n",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"kumarvinaysingvs@gmail.com\",\n    \"user_type\":1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/auth/user/email/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"auth",
+										"user",
+										"email",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:8000/email-otp-verify/",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4NDEyNDQxLCJpYXQiOjE3MzA2MzY0NDEsImp0aSI6IjMwYjcxMzg0ODI0MDQ5Y2U5YzYyMjkyOTc1ZTBkMDE1IiwidXNlcl9pZCI6ImFkOGUxMmQxLTg2ZGQtNDUwMy1iZGQ0LTcwZTJhNzZkYzFlMyIsImlkIjoiYWQ4ZTEyZDEtODZkZC00NTAzLWJkZDQtNzBlMmE3NmRjMWUzIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MjEiLCJ1c2VyX3R5cGUiOjF9.oU7pi8-t9c0XhgZLxq0QB-eU30Neod5hYomrbyzWnz0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Session-Id",
+										"value": "8hfrlcw4mic7dhn7bthyf11fah4us9wt",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "X-CSRFToken",
+										"value": "N0N5lm4NH9UpE7laf9xrDbFeBLl4OE9H",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"kumarvinaysingvs@gmail.com\",\n    \"email_otp\":\"908314\",\n    \"user_type\":1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/auth/user/email/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"auth",
+										"user",
+										"email",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "patient",
+					"item": [
+						{
+							"name": "Add Patient",
+							"item": [
+								{
+									"name": "http://127.0.0.1:8000/patients/add-patient",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4NTAxNDA4LCJpYXQiOjE3MzA3MjU0MDgsImp0aSI6ImU4NTMwZGI2N2ZhODQ4MDA4NjM2NTkzMTEzZWRlOGVjIiwidXNlcl9pZCI6ImFkOGUxMmQxLTg2ZGQtNDUwMy1iZGQ0LTcwZTJhNzZkYzFlMyIsImlkIjoiYWQ4ZTEyZDEtODZkZC00NTAzLWJkZDQtNzBlMmE3NmRjMWUzIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MjEiLCJ1c2VyX3R5cGUiOjF9.UcmrJ0sF7BaZa0CsBWl9ffvjUh96tw7MR5TbHLQaE54",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\":\"satwik sharma\",\n    \"gender\":\"FEMALE\",\n    \"birth_year\":1999,\n    \"birth_month\":12,\n    \"blood_group\":\"A+\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/patients/add-patient",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"patients",
+												"add-patient"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "http://127.0.0.1:8000/patients/add-patient",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4NTAxNDA4LCJpYXQiOjE3MzA3MjU0MDgsImp0aSI6ImU4NTMwZGI2N2ZhODQ4MDA4NjM2NTkzMTEzZWRlOGVjIiwidXNlcl9pZCI6ImFkOGUxMmQxLTg2ZGQtNDUwMy1iZGQ0LTcwZTJhNzZkYzFlMyIsImlkIjoiYWQ4ZTEyZDEtODZkZC00NTAzLWJkZDQtNzBlMmE3NmRjMWUzIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MjEiLCJ1c2VyX3R5cGUiOjF9.UcmrJ0sF7BaZa0CsBWl9ffvjUh96tw7MR5TbHLQaE54",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://127.0.0.1:8000/patients/add-patient",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"patients",
+												"add-patient"
+											],
+											"query": [
+												{
+													"key": "user_id",
+													"value": "9875177172",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Favourite Doctors",
+							"item": [
+								{
+									"name": "Add Favoruite Doctors",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ2MTA0MDI5LCJpYXQiOjE3MzgzMjgwMjksImp0aSI6IjcwZGFlYjIyOWQ1ZjRjNTFiNjA2Nzg2NjE1ZjhiNWE2IiwidXNlcl9pZCI6IjY4NWEzYjViLTA0ZGMtNDc2Ni1iMWI3LTJiYWU3ZWU1Njg3YiIsImlkIjoiNjg1YTNiNWItMDRkYy00NzY2LWIxYjctMmJhZTdlZTU2ODdiIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MjEiLCJ1c2VyX3R5cGUiOjF9.-fC5MwkKjge7BTnYjfRxjNcXFEZG2ZBq6YiqyZEunpc",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"doctor_profile_id\":210000\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/patients/favourite-doctors",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"patients",
+												"favourite-doctors"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Favoruite Doctors",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ2MTA0MDI5LCJpYXQiOjE3MzgzMjgwMjksImp0aSI6IjcwZGFlYjIyOWQ1ZjRjNTFiNjA2Nzg2NjE1ZjhiNWE2IiwidXNlcl9pZCI6IjY4NWEzYjViLTA0ZGMtNDc2Ni1iMWI3LTJiYWU3ZWU1Njg3YiIsImlkIjoiNjg1YTNiNWItMDRkYy00NzY2LWIxYjctMmJhZTdlZTU2ODdiIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MjEiLCJ1c2VyX3R5cGUiOjF9.-fC5MwkKjge7BTnYjfRxjNcXFEZG2ZBq6YiqyZEunpc",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://127.0.0.1:8000/patients/favourite-doctors",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"patients",
+												"favourite-doctors"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Favourite Doctors",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ2MTA0MDI5LCJpYXQiOjE3MzgzMjgwMjksImp0aSI6IjcwZGFlYjIyOWQ1ZjRjNTFiNjA2Nzg2NjE1ZjhiNWE2IiwidXNlcl9pZCI6IjY4NWEzYjViLTA0ZGMtNDc2Ni1iMWI3LTJiYWU3ZWU1Njg3YiIsImlkIjoiNjg1YTNiNWItMDRkYy00NzY2LWIxYjctMmJhZTdlZTU2ODdiIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MjEiLCJ1c2VyX3R5cGUiOjF9.-fC5MwkKjge7BTnYjfRxjNcXFEZG2ZBq6YiqyZEunpc",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"doctor_profile_id\":210000\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/patients/favourite-doctors",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"patients",
+												"favourite-doctors"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Appointment",
+					"item": [
+						{
+							"name": "Appointment Book",
+							"item": [
+								{
+									"name": "{{localhost}}appointments/appointment",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQwMzEwNzYzLCJpYXQiOjE3MzI1MzQ3NjMsImp0aSI6IjM5YmYwYTYwMzgwMDQ0MzI4NGNlODg4NmZkNGQ4MDJhIiwidXNlcl9pZCI6IjY4NWEzYjViLTA0ZGMtNDc2Ni1iMWI3LTJiYWU3ZWU1Njg3YiIsImlkIjoiNjg1YTNiNWItMDRkYy00NzY2LWIxYjctMmJhZTdlZTU2ODdiIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MjEiLCJ1c2VyX3R5cGUiOjF9.9dvLUHMwmh8CTMtarp6XMPqXYil6KFxOoUi1xvAthNA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"doctor_calendar\":\"43e9440a-c21d-407f-98ab-1a4763bb410c\",\n    \"patient\":2100340023,\n    \"reason_of_appointment\":\"i am having fever from two days\"\n\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{localhost}}appointments/appointment",
+											"host": [
+												"{{localhost}}appointments"
+											],
+											"path": [
+												"appointment"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "{{localhost}}appointments/appointment",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQwMzEwNzYzLCJpYXQiOjE3MzI1MzQ3NjMsImp0aSI6IjM5YmYwYTYwMzgwMDQ0MzI4NGNlODg4NmZkNGQ4MDJhIiwidXNlcl9pZCI6IjY4NWEzYjViLTA0ZGMtNDc2Ni1iMWI3LTJiYWU3ZWU1Njg3YiIsImlkIjoiNjg1YTNiNWItMDRkYy00NzY2LWIxYjctMmJhZTdlZTU2ODdiIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MjEiLCJ1c2VyX3R5cGUiOjF9.9dvLUHMwmh8CTMtarp6XMPqXYil6KFxOoUi1xvAthNA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\":210000,\n    \"calendar\":\"923bc32b-6bfc-427f-8562-6df4714083ab\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{localhost}}appointments/appointment",
+											"host": [
+												"{{localhost}}appointments"
+											],
+											"path": [
+												"appointment"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Payment",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQwMzEwNzYzLCJpYXQiOjE3MzI1MzQ3NjMsImp0aSI6IjM5YmYwYTYwMzgwMDQ0MzI4NGNlODg4NmZkNGQ4MDJhIiwidXNlcl9pZCI6IjY4NWEzYjViLTA0ZGMtNDc2Ni1iMWI3LTJiYWU3ZWU1Njg3YiIsImlkIjoiNjg1YTNiNWItMDRkYy00NzY2LWIxYjctMmJhZTdlZTU2ODdiIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MjEiLCJ1c2VyX3R5cGUiOjF9.9dvLUHMwmh8CTMtarp6XMPqXYil6KFxOoUi1xvAthNA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"appointment\":210000\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{localhost}}appointments/appointment",
+											"host": [
+												"{{localhost}}appointments"
+											],
+											"path": [
+												"appointment"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "New Request",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ2MTA0MDI5LCJpYXQiOjE3MzgzMjgwMjksImp0aSI6IjcwZGFlYjIyOWQ1ZjRjNTFiNjA2Nzg2NjE1ZjhiNWE2IiwidXNlcl9pZCI6IjY4NWEzYjViLTA0ZGMtNDc2Ni1iMWI3LTJiYWU3ZWU1Njg3YiIsImlkIjoiNjg1YTNiNWItMDRkYy00NzY2LWIxYjctMmJhZTdlZTU2ODdiIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MjEiLCJ1c2VyX3R5cGUiOjF9.-fC5MwkKjge7BTnYjfRxjNcXFEZG2ZBq6YiqyZEunpc",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{localhost}}appointments/appointment?id=210007",
+											"host": [
+												"{{localhost}}appointments"
+											],
+											"path": [
+												"appointment"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "210007"
+												},
+												{
+													"key": "patient_id",
+													"value": "2100340024",
+													"disabled": true
+												},
+												{
+													"key": "booking_status",
+													"value": "success",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Appointment Patient",
+							"item": [
+								{
+									"name": "Feedback",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{localhost}}appointments/appointment-patient-view",
+											"host": [
+												"{{localhost}}appointments"
+											],
+											"path": [
+												"appointment-patient-view"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "refund",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{localhost}}appointments/appointment-patient-view",
+											"host": [
+												"{{localhost}}appointments"
+											],
+											"path": [
+												"appointment-patient-view"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "doctor",
+			"item": [
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "signup",
+							"item": [
+								{
+									"name": "http://127.0.0.1:8000/auth/doctor/signup",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "I8m6UUoAfjleUp6JsTGEh06XqWP5pOjG",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"mobile_number\":8448558652,\n    \"password\":\"Skyingsl3@\",\n    \"user_type\":2,\n    \"doctor_subtype\":1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{docapp}}auth/doctor/signup",
+											"host": [
+												"{{docapp}}auth"
+											],
+											"path": [
+												"doctor",
+												"signup"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "http://127.0.0.1:8000/auth/doctor/signup",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "csrftoken",
+												"value": "EmzOVxRPMgozEzwXyJ9AnSEUPZ6AGl7p",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"mobile_number\":8448558616,\n    \"otp_entered\":\"639647\",\n    \"user_type\":2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/auth/doctor/signup",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"auth",
+												"doctor",
+												"signup"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "http://127.0.0.1:8000/auth/doctor/signup",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4NDcyNzc5LCJpYXQiOjE3MzA2OTY3NzksImp0aSI6IjFhMmRkN2FlYjk5YTQ2N2VhYTljMTFjYWEzMzU3OGQ2IiwidXNlcl9pZCI6IjUxNzMwYWQ0LTdhZDktNDAxYS1iYjU1LTgzYmM0MzcyYmRjMiIsImlkIjoiNTE3MzBhZDQtN2FkOS00MDFhLWJiNTUtODNiYzQzNzJiZGMyIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MTYiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyfQ.5tSEZuzGGPLupa6GClx9Fbmy_dUTYOq-FquqwY24ocU",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"address_line\":\"kolkata\",\n    \"city\":\"kolkata\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/auth/doctor/signup",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"auth",
+												"doctor",
+												"signup"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "login",
+							"item": [
+								{
+									"name": "http://127.0.0.1:8000/auth/doctor/login/",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "RHYM9WquzGpJnBGZVmYz1Cr0OxexKY2n",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"mobile_number\":8448558652,\n    \"password\":\"Skyingsl3@\",\n    \"user_type\":2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{docapp}}auth/doctor/login/",
+											"host": [
+												"{{docapp}}auth"
+											],
+											"path": [
+												"doctor",
+												"login",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "http://127.0.0.1:8000/auth/doctor/login/",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4NDcyNzc5LCJpYXQiOjE3MzA2OTY3NzksImp0aSI6IjFhMmRkN2FlYjk5YTQ2N2VhYTljMTFjYWEzMzU3OGQ2IiwidXNlcl9pZCI6IjUxNzMwYWQ0LTdhZDktNDAxYS1iYjU1LTgzYmM0MzcyYmRjMiIsImlkIjoiNTE3MzBhZDQtN2FkOS00MDFhLWJiNTUtODNiYzQzNzJiZGMyIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MTYiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyfQ.5tSEZuzGGPLupa6GClx9Fbmy_dUTYOq-FquqwY24ocU",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Session-Id",
+												"value": "vc7pjmhd9j92xo45p407vk3jhh808ny4",
+												"type": "text",
+												"disabled": true
+											},
+											{
+												"key": "X-CSRFToken",
+												"value": "vfjIMFLmyKV2tJyWAA0Zh98XwZZuW1Nh",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"current_password\":\"King@123\",\n    \"new_password\":\"King@1234\",\n    \"new_password2\":\"King@1234\",\n    \"user_type\":2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/auth/doctor/login/",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"auth",
+												"doctor",
+												"login",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Email",
+							"item": [
+								{
+									"name": "http://127.0.0.1:8000/auth/user/email/",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4NDczMTUzLCJpYXQiOjE3MzA2OTcxNTMsImp0aSI6IjJiOGRmZDRhNWEzNTQ2OTFhNmM5N2JmM2Q3M2Q0NDUwIiwidXNlcl9pZCI6IjUxNzMwYWQ0LTdhZDktNDAxYS1iYjU1LTgzYmM0MzcyYmRjMiIsImlkIjoiNTE3MzBhZDQtN2FkOS00MDFhLWJiNTUtODNiYzQzNzJiZGMyIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MTYiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyfQ.OFul-lpgKlETgPSe6L4Mh3eGZyrPrnkFKU05SjIbttI",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Session-Id",
+												"value": "kc533deiaao47fkaflbjs6ddwym5rc0m",
+												"type": "text",
+												"disabled": true
+											},
+											{
+												"key": "X-CSRFToken",
+												"value": "T4q8CrearCWhf9NjUdUHRh6pQ7hrvsGM",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\":\"ashjhiskid@gmail.com\",\n    \"user_type\":2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/auth/user/email/",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"auth",
+												"user",
+												"email",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "http://127.0.0.1:8000/auth/user/email/",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4NDczMTUzLCJpYXQiOjE3MzA2OTcxNTMsImp0aSI6IjJiOGRmZDRhNWEzNTQ2OTFhNmM5N2JmM2Q3M2Q0NDUwIiwidXNlcl9pZCI6IjUxNzMwYWQ0LTdhZDktNDAxYS1iYjU1LTgzYmM0MzcyYmRjMiIsImlkIjoiNTE3MzBhZDQtN2FkOS00MDFhLWJiNTUtODNiYzQzNzJiZGMyIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MTYiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyfQ.OFul-lpgKlETgPSe6L4Mh3eGZyrPrnkFKU05SjIbttI",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Session-Id",
+												"value": "u6g9pg27hx3fmonsf6gvcmkvdbux1nt0",
+												"type": "text",
+												"disabled": true
+											},
+											{
+												"key": "X-CSRFToken",
+												"value": "T4q8CrearCWhf9NjUdUHRh6pQ7hrvsGM",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\":\"ashjhiskid@gmail.com\",\n    \"email_otp\":\"992561\",\n    \"user_type\":2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/auth/user/email/",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"auth",
+												"user",
+												"email",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Forgot Password",
+							"item": [
+								{
+									"name": "http://127.0.0.1:8000/auth/doctor/forgot-password/",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "5v18lwGCdQ5qGWJAUlhHGxN3FvLycfWu",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\"email\":\"ashjhiskid@gmail.com\",\n\"user_type\":2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/auth/doctor/forgot-password/",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"auth",
+												"doctor",
+												"forgot-password",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "http://127.0.0.1:8000/auth/doctor/forgot-password/",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "5v18lwGCdQ5qGWJAUlhHGxN3FvLycfWu",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\":\"ashjhiskid@gmail.com\",\n    \"otp_entered\":\"446575\",\n    \"new_password\":\"King@123\",\n    \"new_password2\":\"King@123\",\n    \"user_type\":2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/auth/doctor/forgot-password/",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"auth",
+												"doctor",
+												"forgot-password",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Staff User",
+							"item": [
+								{
+									"name": "http://127.0.0.1:8000/auth/doctor/staff-user/",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4NDczMTUzLCJpYXQiOjE3MzA2OTcxNTMsImp0aSI6IjJiOGRmZDRhNWEzNTQ2OTFhNmM5N2JmM2Q3M2Q0NDUwIiwidXNlcl9pZCI6IjUxNzMwYWQ0LTdhZDktNDAxYS1iYjU1LTgzYmM0MzcyYmRjMiIsImlkIjoiNTE3MzBhZDQtN2FkOS00MDFhLWJiNTUtODNiYzQzNzJiZGMyIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MTYiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyfQ.OFul-lpgKlETgPSe6L4Mh3eGZyrPrnkFKU05SjIbttI",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "mmvqxzB9Z9j0Dr6BtTfEUNvRAuj7M8ug",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"mobile_number\":8448558631,\n    \"name\":\"staff\",\n    \"gender\":\"male\",\n    \"doctor_subtype\":2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/auth/doctor/staff-user/",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"auth",
+												"doctor",
+												"staff-user",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "http://127.0.0.1:8000/auth/doctor/staff-user/",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "nOKj8Mj42ZMbrjb3QXOsVPFCj2QOox7u",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"mobile_number\":8448558632,\n    \"otp_entered\":\"695498\",\n    \"password\":\"Skyingsl3@\",\n    \"user_type\":2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/auth/doctor/staff-user/",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"auth",
+												"doctor",
+												"staff-user",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "http://127.0.0.1:8000/auth/doctor/staff-user/",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4NDcyNzc5LCJpYXQiOjE3MzA2OTY3NzksImp0aSI6IjFhMmRkN2FlYjk5YTQ2N2VhYTljMTFjYWEzMzU3OGQ2IiwidXNlcl9pZCI6IjUxNzMwYWQ0LTdhZDktNDAxYS1iYjU1LTgzYmM0MzcyYmRjMiIsImlkIjoiNTE3MzBhZDQtN2FkOS00MDFhLWJiNTUtODNiYzQzNzJiZGMyIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MTYiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyfQ.5tSEZuzGGPLupa6GClx9Fbmy_dUTYOq-FquqwY24ocU",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "HvFAgAgVXKHffWzy7OrwblzMhSbQuAoj",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"mobile_number\":8448558632\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/auth/doctor/staff-user/",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"auth",
+												"doctor",
+												"staff-user",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Profile",
+					"item": [
+						{
+							"name": "http://127.0.0.1:8000/doctor-profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5NjEwNjgzLCJpYXQiOjE3MzE4MzQ2ODMsImp0aSI6Ijc1NjFmMzUwZjI4NzRkZGM5OGY4MmQ5MGFmNGIyZWVhIiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjozfQ.8alCpVBnU_0xt_qH0q-4s16-EKr6OE0bYF7a1jc-Wbg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "naveen",
+											"type": "text"
+										},
+										{
+											"key": "gender",
+											"value": "MALE",
+											"type": "text"
+										},
+										{
+											"key": "age",
+											"value": "29",
+											"type": "text"
+										},
+										{
+											"key": "experience_in_years",
+											"value": "18",
+											"type": "text"
+										},
+										{
+											"key": "language",
+											"value": "HINDI,ENGLISH",
+											"type": "text"
+										},
+										{
+											"key": "designation",
+											"value": "5",
+											"type": "text"
+										},
+										{
+											"key": "education",
+											"value": "{\"mbbs\":\"rml hospital\", \"phd\":\"wharton school\"}",
+											"type": "text"
+										},
+										{
+											"key": "experiences",
+											"value": "{\"rmh hospital\":\"3 years\",\"klm hospital\":\"2 years as senior surgeon\"}",
+											"type": "text"
+										},
+										{
+											"key": "awards_and_achievements",
+											"value": "{\"1\":\"member of 100 top doctors\"}",
+											"type": "text"
+										},
+										{
+											"key": "license_image",
+											"type": "file",
+											"src": "/Users/loconav/Downloads/pexels-photo-268533.jpeg"
+										},
+										{
+											"key": "profile_image",
+											"type": "file",
+											"src": "/Users/loconav/Downloads/pexels-photo-268533.jpeg"
+										},
+										{
+											"key": "license_number",
+											"value": "iedhfudjkeeol",
+											"type": "text"
+										},
+										{
+											"key": "id",
+											"value": "210001",
+											"type": "text",
+											"disabled": true
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/doctor/doctor-profile",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"doctor",
+										"doctor-profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:8000/update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5NjEwNjgzLCJpYXQiOjE3MzE4MzQ2ODMsImp0aSI6Ijc1NjFmMzUwZjI4NzRkZGM5OGY4MmQ5MGFmNGIyZWVhIiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjozfQ.8alCpVBnU_0xt_qH0q-4s16-EKr6OE0bYF7a1jc-Wbg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5NjEwNjgzLCJpYXQiOjE3MzE4MzQ2ODMsImp0aSI6Ijc1NjFmMzUwZjI4NzRkZGM5OGY4MmQ5MGFmNGIyZWVhIiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjozfQ.8alCpVBnU_0xt_qH0q-4s16-EKr6OE0bYF7a1jc-Wbg"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "naveen",
+											"type": "text"
+										},
+										{
+											"key": "gender",
+											"value": "MALE",
+											"type": "text"
+										},
+										{
+											"key": "age",
+											"value": "29",
+											"type": "text"
+										},
+										{
+											"key": "experience_in_years",
+											"value": "18",
+											"type": "text"
+										},
+										{
+											"key": "language",
+											"value": "HINDI,ENGLISH",
+											"type": "text"
+										},
+										{
+											"key": "designation",
+											"value": "5",
+											"type": "text"
+										},
+										{
+											"key": "education",
+											"value": "{\"mbbs\":\"rml hospital\", \"phd\":\"wharton school\"}",
+											"type": "text"
+										},
+										{
+											"key": "experiences",
+											"value": "{\"rmh hospital\":\"3 years\",\"klm hospital\":\"2 years as senior surgeon\"}",
+											"type": "text"
+										},
+										{
+											"key": "awards_and_achievements",
+											"value": "{\"1\":\"member of 100 top doctors\"}",
+											"type": "text"
+										},
+										{
+											"key": "license_image",
+											"value": "@\"/Users/loconav/Downloads/pexels-photo-268533.jpeg\"",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "profile_image",
+											"value": "@\"/Users/loconav/Downloads/pexels-photo-268533.jpeg\"",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "license_number",
+											"value": "iedhfudjkeeol",
+											"type": "text"
+										},
+										{
+											"key": "id",
+											"value": "210000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/doctor/doctor-profile",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"doctor",
+										"doctor-profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "For doctor only",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5NjYxNjg5LCJpYXQiOjE3NDE4ODU2ODksImp0aSI6ImI4ZTY1NWM3ODkxODRkZWJiMDdmZDM3NjJkNDdlYmVkIiwidXNlcl9pZCI6IjAzMDQ4MWEzLWI5MTctNDBlZS1hYjA5LTU3YWQ5YjI3YmI5NCIsImlkIjoiMDMwNDgxYTMtYjkxNy00MGVlLWFiMDktNTdhZDliMjdiYjk0IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NTIiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyLCJkb2N0b3Jfc3VidHlwZSI6MSwibmFtZSI6Im5hdmVlbiIsIm9uYm9hcmRpbmciOmZhbHNlfQ.FqqqVHkRQCZAZVXgrG_Bmm0YWnSREpnFce3LjqUP5vI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{docapp}}doctor/doctor-profile",
+									"host": [
+										"{{docapp}}doctor"
+									],
+									"path": [
+										"doctor-profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Generic For all user",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{docapp}}doctor/availability/doctor-profile?specialities=4&name=kunal&doctor_id=210000&designation=5&city=kolkata",
+									"host": [
+										"{{docapp}}doctor"
+									],
+									"path": [
+										"availability",
+										"doctor-profile"
+									],
+									"query": [
+										{
+											"key": "specialities",
+											"value": "4"
+										},
+										{
+											"key": "name",
+											"value": "kunal"
+										},
+										{
+											"key": "doctor_id",
+											"value": "210000"
+										},
+										{
+											"key": "designation",
+											"value": "5"
+										},
+										{
+											"key": "city",
+											"value": "kolkata"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "subscription",
+					"item": [
+						{
+							"name": "create subscription",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5NjYxNjg5LCJpYXQiOjE3NDE4ODU2ODksImp0aSI6ImI4ZTY1NWM3ODkxODRkZWJiMDdmZDM3NjJkNDdlYmVkIiwidXNlcl9pZCI6IjAzMDQ4MWEzLWI5MTctNDBlZS1hYjA5LTU3YWQ5YjI3YmI5NCIsImlkIjoiMDMwNDgxYTMtYjkxNy00MGVlLWFiMDktNTdhZDliMjdiYjk0IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NTIiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyLCJkb2N0b3Jfc3VidHlwZSI6MSwibmFtZSI6Im5hdmVlbiIsIm9uYm9hcmRpbmciOmZhbHNlfQ.FqqqVHkRQCZAZVXgrG_Bmm0YWnSREpnFce3LjqUP5vI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\":3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{docapp}}doctor/doctor-subscription",
+									"host": [
+										"{{docapp}}doctor"
+									],
+									"path": [
+										"doctor-subscription"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5NjYxNjg5LCJpYXQiOjE3NDE4ODU2ODksImp0aSI6ImI4ZTY1NWM3ODkxODRkZWJiMDdmZDM3NjJkNDdlYmVkIiwidXNlcl9pZCI6IjAzMDQ4MWEzLWI5MTctNDBlZS1hYjA5LTU3YWQ5YjI3YmI5NCIsImlkIjoiMDMwNDgxYTMtYjkxNy00MGVlLWFiMDktNTdhZDliMjdiYjk0IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NTIiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyLCJkb2N0b3Jfc3VidHlwZSI6MSwibmFtZSI6Im5hdmVlbiIsIm9uYm9hcmRpbmciOmZhbHNlfQ.FqqqVHkRQCZAZVXgrG_Bmm0YWnSREpnFce3LjqUP5vI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{docapp}}doctor/doctor-subscription",
+									"host": [
+										"{{docapp}}doctor"
+									],
+									"path": [
+										"doctor-subscription"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "specialities",
+					"item": [
+						{
+							"name": "http://127.0.0.1:8000/doctor-speciality",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5NjEwNjgzLCJpYXQiOjE3MzE4MzQ2ODMsImp0aSI6Ijc1NjFmMzUwZjI4NzRkZGM5OGY4MmQ5MGFmNGIyZWVhIiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjozfQ.8alCpVBnU_0xt_qH0q-4s16-EKr6OE0bYF7a1jc-Wbg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"specialities\":[1,2,3]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/doctor/doctor-speciality",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"doctor",
+										"doctor-speciality"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:8000/doctor-speciality",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5NjEwNjgzLCJpYXQiOjE3MzE4MzQ2ODMsImp0aSI6Ijc1NjFmMzUwZjI4NzRkZGM5OGY4MmQ5MGFmNGIyZWVhIiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjozfQ.8alCpVBnU_0xt_qH0q-4s16-EKr6OE0bYF7a1jc-Wbg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"specialities\":[1,2]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/doctor/doctor-speciality",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"doctor",
+										"doctor-speciality"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5NjYxNjg5LCJpYXQiOjE3NDE4ODU2ODksImp0aSI6ImI4ZTY1NWM3ODkxODRkZWJiMDdmZDM3NjJkNDdlYmVkIiwidXNlcl9pZCI6IjAzMDQ4MWEzLWI5MTctNDBlZS1hYjA5LTU3YWQ5YjI3YmI5NCIsImlkIjoiMDMwNDgxYTMtYjkxNy00MGVlLWFiMDktNTdhZDliMjdiYjk0IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NTIiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyLCJkb2N0b3Jfc3VidHlwZSI6MSwibmFtZSI6Im5hdmVlbiIsIm9uYm9hcmRpbmciOmZhbHNlfQ.FqqqVHkRQCZAZVXgrG_Bmm0YWnSREpnFce3LjqUP5vI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{docapp}}doctor/doctor-speciality?value=ALL",
+									"host": [
+										"{{docapp}}doctor"
+									],
+									"path": [
+										"doctor-speciality"
+									],
+									"query": [
+										{
+											"key": "value",
+											"value": "ALL"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Dcotor Test",
+					"item": [
+						{
+							"name": "Add test",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5NjEwNjgzLCJpYXQiOjE3MzE4MzQ2ODMsImp0aSI6Ijc1NjFmMzUwZjI4NzRkZGM5OGY4MmQ5MGFmNGIyZWVhIiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjozfQ.8alCpVBnU_0xt_qH0q-4s16-EKr6OE0bYF7a1jc-Wbg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/doctor/doctor-test",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"doctor",
+										"doctor-test"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Test",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5NjEwNjgzLCJpYXQiOjE3MzE4MzQ2ODMsImp0aSI6Ijc1NjFmMzUwZjI4NzRkZGM5OGY4MmQ5MGFmNGIyZWVhIiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjozfQ.8alCpVBnU_0xt_qH0q-4s16-EKr6OE0bYF7a1jc-Wbg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"test_detail\":[1,2,3]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/doctor/doctor-test",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"doctor",
+										"doctor-test"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:8000/doctor/doctor-test",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/doctor/doctor-test",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"doctor",
+										"doctor-test"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "medicines",
+					"item": [
+						{
+							"name": "http://127.0.0.1:8000/doctor-medicines",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5NjEwNjgzLCJpYXQiOjE3MzE4MzQ2ODMsImp0aSI6Ijc1NjFmMzUwZjI4NzRkZGM5OGY4MmQ5MGFmNGIyZWVhIiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjozfQ.8alCpVBnU_0xt_qH0q-4s16-EKr6OE0bYF7a1jc-Wbg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"medicine_name\":\"calpol\",\n    \"medicine_composition\":\"uhdbhic\",\n    \"medicine_company\":\"divi\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/doctor/doctor-medicines",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"doctor",
+										"doctor-medicines"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5NjEwNjgzLCJpYXQiOjE3MzE4MzQ2ODMsImp0aSI6Ijc1NjFmMzUwZjI4NzRkZGM5OGY4MmQ5MGFmNGIyZWVhIiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjozfQ.8alCpVBnU_0xt_qH0q-4s16-EKr6OE0bYF7a1jc-Wbg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"serial_number\":1,\n    \"medicine_name\":\"uini\",\n    \"medicine_composition\":\"uhdbhic\",\n    \"medicine_company\":\"sunpharma\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/doctor/doctor-medicines",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"doctor",
+										"doctor-medicines"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:8000/doctor-medicines?doctor_profile=210002",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5NjEwNjgzLCJpYXQiOjE3MzE4MzQ2ODMsImp0aSI6Ijc1NjFmMzUwZjI4NzRkZGM5OGY4MmQ5MGFmNGIyZWVhIiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjozfQ.8alCpVBnU_0xt_qH0q-4s16-EKr6OE0bYF7a1jc-Wbg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/doctor/doctor-medicines",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"doctor",
+										"doctor-medicines"
+									],
+									"query": [
+										{
+											"key": "doctor_profile",
+											"value": "210002",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:8000/doctor-medicines",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5NjEwNjgzLCJpYXQiOjE3MzE4MzQ2ODMsImp0aSI6Ijc1NjFmMzUwZjI4NzRkZGM5OGY4MmQ5MGFmNGIyZWVhIiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjozfQ.8alCpVBnU_0xt_qH0q-4s16-EKr6OE0bYF7a1jc-Wbg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"serial_number_list\":[1,2]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/doctor/doctor-medicines",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"doctor",
+										"doctor-medicines"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:8000/doctor-medicines",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "excel_file",
+											"type": "file",
+											"src": "/Users/loconav/Downloads/Untitled spreadsheet.xlsx"
+										},
+										{
+											"key": "doctor_profile",
+											"value": "210002",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/doctor/doctor-medicines",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"doctor",
+										"doctor-medicines"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Bank Details",
+					"item": [
+						{
+							"name": "http://127.0.0.1:8000/doctor/bank-details",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/doctor/bank-details",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"doctor",
+										"bank-details"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5NjEwNjgzLCJpYXQiOjE3MzE4MzQ2ODMsImp0aSI6Ijc1NjFmMzUwZjI4NzRkZGM5OGY4MmQ5MGFmNGIyZWVhIiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjozfQ.8alCpVBnU_0xt_qH0q-4s16-EKr6OE0bYF7a1jc-Wbg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\":1.61\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/doctor/bank-details",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"doctor",
+										"bank-details"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5NjEwNjgzLCJpYXQiOjE3MzE4MzQ2ODMsImp0aSI6Ijc1NjFmMzUwZjI4NzRkZGM5OGY4MmQ5MGFmNGIyZWVhIiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjozfQ.8alCpVBnU_0xt_qH0q-4s16-EKr6OE0bYF7a1jc-Wbg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/doctor/bank-details",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"doctor",
+										"bank-details"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5NjEwNjgzLCJpYXQiOjE3MzE4MzQ2ODMsImp0aSI6Ijc1NjFmMzUwZjI4NzRkZGM5OGY4MmQ5MGFmNGIyZWVhIiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjozfQ.8alCpVBnU_0xt_qH0q-4s16-EKr6OE0bYF7a1jc-Wbg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"otp\":\"274184\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/doctor/bank-details",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"doctor",
+										"bank-details"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": null
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Doctor",
+					"item": [
+						{
+							"name": "Clinic",
+							"item": [
+								{
+									"name": "{{localhost}}doctor/doctor-clinic",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5NjYxNjg5LCJpYXQiOjE3NDE4ODU2ODksImp0aSI6ImI4ZTY1NWM3ODkxODRkZWJiMDdmZDM3NjJkNDdlYmVkIiwidXNlcl9pZCI6IjAzMDQ4MWEzLWI5MTctNDBlZS1hYjA5LTU3YWQ5YjI3YmI5NCIsImlkIjoiMDMwNDgxYTMtYjkxNy00MGVlLWFiMDktNTdhZDliMjdiYjk0IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NTIiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyLCJkb2N0b3Jfc3VidHlwZSI6MSwibmFtZSI6Im5hdmVlbiIsIm9uYm9hcmRpbmciOmZhbHNlfQ.FqqqVHkRQCZAZVXgrG_Bmm0YWnSREpnFce3LjqUP5vI",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"contact_details\":[7456908765,7867543421],\n    \"clinic_name\":\"my_clinic\",\n    \"email_details\":\"abc@support.com\",\n    \"patient_charges\":210.00,\n    \"after_visit_days\":5,\n    \"after_visit_max_chances\":3,\n    \"max_visits_time\":10,\n    \"daily_patient_limit\":60,\n    \"average_start_time\":\"10:00:00\",\n    \"average_end_time\":\"17:00:00\",\n    \"average_break_time_start\":\"13:00:00\",\n    \"average_break_time_end\":\"14:00:00\",\n    \"building_number\":\"F-23\",\n    \"address_line\":\"this is my address\",\n    \"city\":\"kolkata\",\n    \"district\":\"kolkata\",\n    \"state\":\"west bengal\",\n    \"pin_code\":123098,\n    \"location\":\"https://web.com\",\n    \"week_off_days\":[1,2]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{docapp}}doctor/doctor-clinic",
+											"host": [
+												"{{docapp}}doctor"
+											],
+											"path": [
+												"doctor-clinic"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "New Request",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5NjYxNjg5LCJpYXQiOjE3NDE4ODU2ODksImp0aSI6ImI4ZTY1NWM3ODkxODRkZWJiMDdmZDM3NjJkNDdlYmVkIiwidXNlcl9pZCI6IjAzMDQ4MWEzLWI5MTctNDBlZS1hYjA5LTU3YWQ5YjI3YmI5NCIsImlkIjoiMDMwNDgxYTMtYjkxNy00MGVlLWFiMDktNTdhZDliMjdiYjk0IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NTIiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyLCJkb2N0b3Jfc3VidHlwZSI6MSwibmFtZSI6Im5hdmVlbiIsIm9uYm9hcmRpbmciOmZhbHNlfQ.FqqqVHkRQCZAZVXgrG_Bmm0YWnSREpnFce3LjqUP5vI",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{docapp}}doctor/doctor-clinic",
+											"host": [
+												"{{docapp}}doctor"
+											],
+											"path": [
+												"doctor-clinic"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "New Request",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ2NTE3NjgyLCJpYXQiOjE3Mzg3NDE2ODIsImp0aSI6IjVmNzgwN2IzYWQ4MDQ3OTI5ZTdhMzg1MzEyYjYzYTU0IiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyfQ.ftFR0o1ad-4jlS2RE_I2ofWxiSKsWAcpuEgnULG3m8Q",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{localhost}}doctor/doctor-clinic",
+											"host": [
+												"{{localhost}}doctor"
+											],
+											"path": [
+												"doctor-clinic"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Calendar",
+							"item": [
+								{
+									"name": "For doctor user",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5NjYxNjg5LCJpYXQiOjE3NDE4ODU2ODksImp0aSI6ImI4ZTY1NWM3ODkxODRkZWJiMDdmZDM3NjJkNDdlYmVkIiwidXNlcl9pZCI6IjAzMDQ4MWEzLWI5MTctNDBlZS1hYjA5LTU3YWQ5YjI3YmI5NCIsImlkIjoiMDMwNDgxYTMtYjkxNy00MGVlLWFiMDktNTdhZDliMjdiYjk0IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NTIiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyLCJkb2N0b3Jfc3VidHlwZSI6MSwibmFtZSI6Im5hdmVlbiIsIm9uYm9hcmRpbmciOmZhbHNlfQ.FqqqVHkRQCZAZVXgrG_Bmm0YWnSREpnFce3LjqUP5vI",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{docapp}}doctor/doctor-calendar?doctor_clinic_id=b711d10c-3cef-4e86-ab90-441b9d97c6b8",
+											"host": [
+												"{{docapp}}doctor"
+											],
+											"path": [
+												"doctor-calendar"
+											],
+											"query": [
+												{
+													"key": "doctor_clinic_id",
+													"value": "b711d10c-3cef-4e86-ab90-441b9d97c6b8"
+												},
+												{
+													"key": "month",
+													"value": "2",
+													"disabled": true
+												},
+												{
+													"key": "year",
+													"value": "20",
+													"disabled": true
+												},
+												{
+													"key": "calendar_id",
+													"value": "bcf832d9-25b0-49ce-8eb3-94919522014f",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Generic for all users",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{docapp}}doctor/availability/doctor-calendar?doctor_clinic_id=b711d10c-3cef-4e86-ab90-441b9d97c6b8&date=2025-03-14",
+											"host": [
+												"{{docapp}}doctor"
+											],
+											"path": [
+												"availability",
+												"doctor-calendar"
+											],
+											"query": [
+												{
+													"key": "doctor_clinic_id",
+													"value": "b711d10c-3cef-4e86-ab90-441b9d97c6b8"
+												},
+												{
+													"key": "month",
+													"value": "2",
+													"disabled": true
+												},
+												{
+													"key": "year",
+													"value": "20",
+													"disabled": true
+												},
+												{
+													"key": "calendar_id",
+													"value": "bcf832d9-25b0-49ce-8eb3-94919522014f",
+													"disabled": true
+												},
+												{
+													"key": "date",
+													"value": "2025-03-14"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Dashboard",
+							"item": [
+								{
+									"name": "Get Appointments For doctor",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5NjYxNjg5LCJpYXQiOjE3NDE4ODU2ODksImp0aSI6ImI4ZTY1NWM3ODkxODRkZWJiMDdmZDM3NjJkNDdlYmVkIiwidXNlcl9pZCI6IjAzMDQ4MWEzLWI5MTctNDBlZS1hYjA5LTU3YWQ5YjI3YmI5NCIsImlkIjoiMDMwNDgxYTMtYjkxNy00MGVlLWFiMDktNTdhZDliMjdiYjk0IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NTIiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyLCJkb2N0b3Jfc3VidHlwZSI6MSwibmFtZSI6Im5hdmVlbiIsIm9uYm9hcmRpbmciOmZhbHNlfQ.FqqqVHkRQCZAZVXgrG_Bmm0YWnSREpnFce3LjqUP5vI",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{docapp}}appointments/appointment-doctor-view?from_date=2025-02-13&to_date=2025-03-30&appointment_status=admin_booked&doctor_clinic_id=b711d10c-3cef-4e86-ab90-441b9d97c6b8",
+											"host": [
+												"{{docapp}}appointments"
+											],
+											"path": [
+												"appointment-doctor-view"
+											],
+											"query": [
+												{
+													"key": "from_date",
+													"value": "2025-02-13"
+												},
+												{
+													"key": "to_date",
+													"value": "2025-03-30"
+												},
+												{
+													"key": "appointment_status",
+													"value": "admin_booked"
+												},
+												{
+													"key": "booking_status",
+													"value": "admin_booked",
+													"disabled": true
+												},
+												{
+													"key": "doctor_clinic_id",
+													"value": "b711d10c-3cef-4e86-ab90-441b9d97c6b8"
+												},
+												{
+													"key": "id",
+													"value": "21000",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Doctor Rating",
+							"item": [
+								{
+									"name": "doctor ratings",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5NjYxNjg5LCJpYXQiOjE3NDE4ODU2ODksImp0aSI6ImI4ZTY1NWM3ODkxODRkZWJiMDdmZDM3NjJkNDdlYmVkIiwidXNlcl9pZCI6IjAzMDQ4MWEzLWI5MTctNDBlZS1hYjA5LTU3YWQ5YjI3YmI5NCIsImlkIjoiMDMwNDgxYTMtYjkxNy00MGVlLWFiMDktNTdhZDliMjdiYjk0IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NTIiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyLCJkb2N0b3Jfc3VidHlwZSI6MSwibmFtZSI6Im5hdmVlbiIsIm9uYm9hcmRpbmciOmZhbHNlfQ.FqqqVHkRQCZAZVXgrG_Bmm0YWnSREpnFce3LjqUP5vI",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{docapp}}doctor/availability/doctor-ratings?doctor_profile_id=210000",
+											"host": [
+												"{{docapp}}doctor"
+											],
+											"path": [
+												"availability",
+												"doctor-ratings"
+											],
+											"query": [
+												{
+													"key": "doctor_profile_id",
+													"value": "210000"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Appointments",
+					"item": [
+						{
+							"name": "Appointment Doctor",
+							"item": [
+								{
+									"name": "{{localhost}}appointments/appointment-doctor-view",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQwNTg5OTQxLCJpYXQiOjE3MzI4MTM5NDEsImp0aSI6IjU5NWEwMWQ0NzlmODRmODViZDg2NTk2OTAyYWRmZWFmIiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjozfQ.r59XPfjYehWPtgAQCIv3tq2OEVxgspjEUkVoFA7ljyc",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"appointment\":210000,\n    \"otp\":345678\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{localhost}}appointments/appointment-doctor-view",
+											"host": [
+												"{{localhost}}appointments"
+											],
+											"path": [
+												"appointment-doctor-view"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "{{localhost}}appointments/appointment-doctor-view",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQwNTg5OTQxLCJpYXQiOjE3MzI4MTM5NDEsImp0aSI6IjU5NWEwMWQ0NzlmODRmODViZDg2NTk2OTAyYWRmZWFmIiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjozfQ.r59XPfjYehWPtgAQCIv3tq2OEVxgspjEUkVoFA7ljyc",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"appointment\":210000,\n    \"suggestions\":\"you are well\",\n    \"suggested_medicines\":[4,5,6,7],\n    \"suggested_tests\":[1,2]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{localhost}}appointments/appointment-doctor-view",
+											"host": [
+												"{{localhost}}appointments"
+											],
+											"path": [
+												"appointment-doctor-view"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "New Request",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{localhost}}appointments/admin-book-view",
+											"host": [
+												"{{localhost}}appointments"
+											],
+											"path": [
+												"admin-book-view"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Admin Booking",
+							"item": [
+								{
+									"name": "New Request",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ2NTE3NjgyLCJpYXQiOjE3Mzg3NDE2ODIsImp0aSI6IjVmNzgwN2IzYWQ4MDQ3OTI5ZTdhMzg1MzEyYjYzYTU0IiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyfQ.ftFR0o1ad-4jlS2RE_I2ofWxiSKsWAcpuEgnULG3m8Q",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{docapp}}appointments/admin-book-view",
+											"host": [
+												"{{docapp}}appointments"
+											],
+											"path": [
+												"admin-book-view"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Support",
+			"item": [
+				{
+					"name": "user support",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ2MTA0MDI5LCJpYXQiOjE3MzgzMjgwMjksImp0aSI6IjcwZGFlYjIyOWQ1ZjRjNTFiNjA2Nzg2NjE1ZjhiNWE2IiwidXNlcl9pZCI6IjY4NWEzYjViLTA0ZGMtNDc2Ni1iMWI3LTJiYWU3ZWU1Njg3YiIsImlkIjoiNjg1YTNiNWItMDRkYy00NzY2LWIxYjctMmJhZTdlZTU2ODdiIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MjEiLCJ1c2VyX3R5cGUiOjF9.-fC5MwkKjge7BTnYjfRxjNcXFEZG2ZBq6YiqyZEunpc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "appointment_id",
+									"value": "210009",
+									"type": "text"
+								},
+								{
+									"key": "support_type",
+									"value": "appointment",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "i am fraud",
+									"type": "text"
+								},
+								{
+									"key": "attachments",
+									"type": "file",
+									"src": "/Users/loconav/Desktop/Screenshot 2025-01-31 at 8.11.49 AM.png"
+								},
+								{
+									"key": "attachments",
+									"type": "file",
+									"src": "/Users/loconav/Desktop/Screenshot 2025-01-30 at 9.54.07 PM.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{docapp}}support/support",
+							"host": [
+								"{{docapp}}support"
+							],
+							"path": [
+								"support"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doctor support",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ2MTA0NDcyLCJpYXQiOjE3MzgzMjg0NzIsImp0aSI6IjJhYjhmZDUwNjFhZTRkYTVhMDA1MWI4YWEyOWJhOTc0IiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyfQ.Tn8nzEZ9ivc8_qw-FPs036wLJvh-W56k_ziJZWnpkJ4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ2MTA0MDI5LCJpYXQiOjE3MzgzMjgwMjksImp0aSI6IjcwZGFlYjIyOWQ1ZjRjNTFiNjA2Nzg2NjE1ZjhiNWE2IiwidXNlcl9pZCI6IjY4NWEzYjViLTA0ZGMtNDc2Ni1iMWI3LTJiYWU3ZWU1Njg3YiIsImlkIjoiNjg1YTNiNWItMDRkYy00NzY2LWIxYjctMmJhZTdlZTU2ODdiIiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MjEiLCJ1c2VyX3R5cGUiOjF9.-fC5MwkKjge7BTnYjfRxjNcXFEZG2ZBq6YiqyZEunpc"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "appointment_id",
+									"value": "\"210009\"",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "support_type",
+									"value": "doctor_payment",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "i am fraud",
+									"type": "text"
+								},
+								{
+									"key": "attachments",
+									"type": "file",
+									"src": "/Users/loconav/Desktop/Screenshot 2025-01-30 at 12.53.39 PM.png"
+								},
+								{
+									"key": "attachments",
+									"type": "file",
+									"src": "/Users/loconav/Desktop/Screenshot 2025-01-30 at 9.54.07 PM.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{docapp}}support/support",
+							"host": [
+								"{{docapp}}support"
+							],
+							"path": [
+								"support"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Support",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ2MTA0NDcyLCJpYXQiOjE3MzgzMjg0NzIsImp0aSI6IjJhYjhmZDUwNjFhZTRkYTVhMDA1MWI4YWEyOWJhOTc0IiwidXNlcl9pZCI6IjExYjc1YjkzLWJkODctNGRlZS04Y2NkLTUwYzlkZTlhZWE3NSIsImlkIjoiMTFiNzViOTMtYmQ4Ny00ZGVlLThjY2QtNTBjOWRlOWFlYTc1IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NDAiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyfQ.Tn8nzEZ9ivc8_qw-FPs036wLJvh-W56k_ziJZWnpkJ4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{docapp}}support/support?id=310042902102",
+							"host": [
+								"{{docapp}}support"
+							],
+							"path": [
+								"support"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "310042902102"
+								},
+								{
+									"key": "support_status",
+									"value": "pending",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payments",
+			"item": [
+				{
+					"name": "get fetures",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5NjYxNjg5LCJpYXQiOjE3NDE4ODU2ODksImp0aSI6ImI4ZTY1NWM3ODkxODRkZWJiMDdmZDM3NjJkNDdlYmVkIiwidXNlcl9pZCI6IjAzMDQ4MWEzLWI5MTctNDBlZS1hYjA5LTU3YWQ5YjI3YmI5NCIsImlkIjoiMDMwNDgxYTMtYjkxNy00MGVlLWFiMDktNTdhZDliMjdiYjk0IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NTIiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyLCJkb2N0b3Jfc3VidHlwZSI6MSwibmFtZSI6Im5hdmVlbiIsIm9uYm9hcmRpbmciOmZhbHNlfQ.FqqqVHkRQCZAZVXgrG_Bmm0YWnSREpnFce3LjqUP5vI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{docapp}}payments/feature-price/?value=MY",
+							"host": [
+								"{{docapp}}payments"
+							],
+							"path": [
+								"feature-price",
+								""
+							],
+							"query": [
+								{
+									"key": "value",
+									"value": "MY",
+									"description": "optional"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Transactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5NjY0MzI2LCJpYXQiOjE3NDE4ODgzMjYsImp0aSI6IjRhNTc3YmIwNzFkYzRiZjU4MTE5NzcxMjNhMDNmN2E1IiwidXNlcl9pZCI6ImQxZjJkMmI2LWFhZjMtNDRjZS1iY2YxLTZkNjU4ZWUyNTI4NCIsImlkIjoiZDFmMmQyYjYtYWFmMy00NGNlLWJjZjEtNmQ2NThlZTI1Mjg0IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2MTYiLCJ1c2VyX3R5cGUiOjEsIm5hbWUiOm51bGx9.eOxzfSDNK4pOl1Dq5avEeuBIRn1PbXKINowzSMqZ_4w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{docapp}}payments/user-transactions/?appointment=210013&order_payment_id",
+							"host": [
+								"{{docapp}}payments"
+							],
+							"path": [
+								"user-transactions",
+								""
+							],
+							"query": [
+								{
+									"key": "appointment",
+									"value": "210013",
+									"description": "optional"
+								},
+								{
+									"key": "order_payment_id",
+									"value": null,
+									"description": "optional"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doctor appointment transactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5NjYxNjg5LCJpYXQiOjE3NDE4ODU2ODksImp0aSI6ImI4ZTY1NWM3ODkxODRkZWJiMDdmZDM3NjJkNDdlYmVkIiwidXNlcl9pZCI6IjAzMDQ4MWEzLWI5MTctNDBlZS1hYjA5LTU3YWQ5YjI3YmI5NCIsImlkIjoiMDMwNDgxYTMtYjkxNy00MGVlLWFiMDktNTdhZDliMjdiYjk0IiwibW9iaWxlX251bWJlciI6Ijg0NDg1NTg2NTIiLCJlbWFpbCI6bnVsbCwidXNlcl90eXBlIjoyLCJkb2N0b3Jfc3VidHlwZSI6MSwibmFtZSI6Im5hdmVlbiIsIm9uYm9hcmRpbmciOmZhbHNlfQ.FqqqVHkRQCZAZVXgrG_Bmm0YWnSREpnFce3LjqUP5vI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{docapp}}payments/doctor-transactions/appointment?appointment_id=210013&doctor_clinic_id=b711d10c-3cef-4e86-ab90-441b9d97c6b8&user_mobile_number=8448558621&from_date=2025-02-24&to_date=2025-05-24",
+							"host": [
+								"{{docapp}}payments"
+							],
+							"path": [
+								"doctor-transactions",
+								"appointment"
+							],
+							"query": [
+								{
+									"key": "appointment_id",
+									"value": "210013"
+								},
+								{
+									"key": "doctor_clinic_id",
+									"value": "b711d10c-3cef-4e86-ab90-441b9d97c6b8",
+									"description": "required"
+								},
+								{
+									"key": "user_mobile_number",
+									"value": "8448558621"
+								},
+								{
+									"key": "from_date",
+									"value": "2025-02-24"
+								},
+								{
+									"key": "to_date",
+									"value": "2025-05-24"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doctor transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
