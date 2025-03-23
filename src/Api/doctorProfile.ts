@@ -1,20 +1,20 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { apiClient } from './NetworkClient';
 
-interface DoctorProfileData {
-  name: string;
-  gender: string;
-  age: number;
-  experience_in_years: number;
-  language: string;
-  designation: number;
-  education: string;
-  experiences: string;
-  awards_and_achievements: string;
-  license_image?: File;
-  profile_image?: File;
-  license_number: string;
-}
+// interface DoctorProfileData {
+//   name: string;
+//   gender: string;
+//   age: number;
+//   experience_in_years: number;
+//   language: string;
+//   designation: number;
+//   education: string;
+//   experiences: string;
+//   awards_and_achievements: string;
+//   license_image?: File;
+//   profile_image?: File;
+//   license_number: string;
+// }
 
 interface SubscriptionData {
   subscription_id: string;
@@ -40,8 +40,13 @@ interface BankDetailsData {
 
 
 const doctorProfileApi = {
-  postDoctorProfile: (data: DoctorProfileData): Promise<AxiosResponse> => apiClient.post('/doctor/doctor-profile', data),
-  patchDoctorProfile: (data: DoctorProfileData): Promise<AxiosResponse> => apiClient.patch('/doctor/doctor-profile', data),
+  postDoctorProfile: (data: FormData): Promise<AxiosResponse> => apiClient.post('/doctor/doctor-profile', data,{headers: {
+    'Content-Type': 'multipart/form-data', // Ensure the correct Content-Type
+  }}),
+  patchDoctorProfile: (data: FormData): Promise<AxiosResponse> => apiClient.patch('/doctor/doctor-profile', data,{headers: {
+    'Content-Type': 'multipart/form-data', // Ensure the correct Content-Type
+  }}),
+  getDoctorProfile: (): Promise<AxiosResponse> => apiClient.get('/doctor/doctor-profile'),
   postDoctorSubscription: (data: any): Promise<AxiosResponse> => apiClient.post('/doctor/doctor-subscription', data),
   putDoctorSubscription: (data: SubscriptionData): Promise<AxiosResponse> => apiClient.put('/doctor/doctor-subscription', data),
   patchDoctorSubscription: (data: SubscriptionData): Promise<AxiosResponse> => apiClient.patch('/doctor/doctor-subscription', data),

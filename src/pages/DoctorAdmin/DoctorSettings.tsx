@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { Camera, Check, Info, Lock, Eye, EyeOff } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Camera, Check, Info, Lock, Eye, EyeOff, Plus, Pencil } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { doctorProfileApi } from '../../Api';
+import { form } from '@heroui/react';
 
 const DoctorSettings = () => {
   const navigate = useNavigate();
@@ -8,7 +10,78 @@ const DoctorSettings = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  // State for dynamic fields
+  const [educationFields, setEducationFields] = useState([]);
+  const [experienceFields, setExperienceFields] = useState([]);
+  const [awardFields, setAwardFields] = useState([]);
+  const [profileData, setProfileData] = useState(null);
+  const [isEditable, setIsEditable] = useState(false);
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await doctorProfileApi.getDoctorProfile();
+        if (response.status === 200) {
+          setProfileData(response.data); // Set profile data
+          setEducationFields(response.data.education || []); // Set education fields
+          setExperienceFields(response.data.experiences || []); // Set experience fields
+          setAwardFields(response.data.awards || []); // Set award fields
+        } else {
+          setProfileData(null); // No profile exists
+        }
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+        setProfileData(null); // No profile exists
+      }
+    };
 
+    fetchProfile();
+  }, []);
+  const handleEditClick = () => {
+    setIsEditable(true); // Enable edit mode
+  };
+  // Handler to add a new field dynamically
+  const handleAddField = (setFields, fields) => {
+    setFields([...fields, {}]); // Add an empty object to the fields array
+  };
+
+  // Handler to update the value of a specific field
+  const handleFieldChange = (index, field, value, setFields, fields) => {
+    const updatedFields = [...fields]; // Create a copy of the fields array
+    updatedFields[index][field] = value; // Update the specific field at the given index
+    setFields(updatedFields); // Update the state with the modified fields array
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    // Append dynamic fields to FormData
+    if (educationFields.length > 0) {
+      formData.append('education', JSON.stringify(educationFields));
+    }
+
+    if (experienceFields.length > 0) {
+      formData.append('experiences', JSON.stringify(experienceFields));
+    }
+
+    if (awardFields.length > 0) {
+      formData.append('awards', JSON.stringify(awardFields));
+    }
+
+    try {
+      if (profileData) {
+        // Update profile using PUT API
+        const response = await doctorProfileApi.patchDoctorProfile(formData);
+        console.log('Profile updated successfully:', response.data);
+        setIsEditable(false); // Disable edit mode
+      } else {
+        // Create profile using POST API
+        const response = await doctorProfileApi.postDoctorProfile(formData);
+        console.log('Profile created successfully:', response.data);
+        setProfileData(response.data); // Set the newly created profile
+      }
+    } catch (error) {
+      console.error('Error saving profile:', error);
+    }
+  };
   // State for toggle switches
   const [notifications, setNotifications] = useState({
     email: true,
@@ -51,31 +124,31 @@ const DoctorSettings = () => {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-sm border p-4">
               <nav className="flex flex-col space-y-1 w-full">
-                <button 
+                <button
                   onClick={() => handleTabClick('profile')}
                   className={`text-left px-4 py-2 rounded ${activeTab === 'profile' ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-50'}`}
                 >
                   Profile Information
                 </button>
-                <button 
+                <button
                   onClick={() => handleTabClick('subscription')}
                   className={`text-left px-4 py-2 rounded ${activeTab === 'subscription' ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-50'}`}
                 >
                   Subscription
                 </button>
-                <button 
+                <button
                   onClick={() => handleTabClick('bank')}
                   className={`text-left px-4 py-2 rounded ${activeTab === 'bank' ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-50'}`}
                 >
                   Bank Details
                 </button>
-                <button 
+                <button
                   onClick={() => handleTabClick('notifications')}
                   className={`text-left px-4 py-2 rounded ${activeTab === 'notifications' ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-50'}`}
                 >
                   Notifications
                 </button>
-                <button 
+                <button
                   onClick={() => handleTabClick('security')}
                   className={`text-left px-4 py-2 rounded ${activeTab === 'security' ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-50'}`}
                 >
@@ -91,115 +164,392 @@ const DoctorSettings = () => {
             {activeTab === 'profile' && (
               <div className="bg-white rounded-lg shadow-sm border">
                 <div className="p-6 border-b border-gray-200">
+                  {/* Profile Photo */}
+                  <div className="relative">
+                    {profileData?.profile_image ? (
+                      <img
+                        src={profileData.profile_image}
+                        alt="Profile"
+                        className="w-24 h-24 object-cover rounded-full border-2 border-blue-500"
+                      />
+                    ) : (
+                      <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center text-gray-500">
+                        <Camera className="h-8 w-8" />
+                      </div>
+                    )}
+                    {isEditable && (
+                      <label
+                        htmlFor="profile_image"
+                        className="absolute bottom-0 right-0 bg-blue-500 text-white p-1 rounded-full cursor-pointer"
+                      >
+                        <Camera className="h-4 w-4" />
+                        <input
+                          type="file"
+                          id="profile_image"
+                          name="profile_image"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => {
+                            const file = e.target.files[0];
+                            if (file) {
+                              const reader = new FileReader();
+                              reader.onload = () => {
+                                setProfileData({ ...profileData, profile_image: reader.result });
+                              };
+                              reader.readAsDataURL(file);
+                            }
+                          }}
+                        />
+                      </label>
+                    )}
+                  </div>
                   <h2 className="text-lg font-medium text-gray-800">Profile Information</h2>
                 </div>
                 <div className="p-6">
-                  <div className="flex items-center mb-6">
-                    <div className="relative">
-                      <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden border-2 border-gray-200">
-                        <img src="/api/placeholder/96/96" alt="Doctor Profile" className="w-full h-full object-cover" />
-                      </div>
-                      <button 
-                        className="absolute bottom-0 right-0 rounded-full p-1 bg-blue-600 text-white hover:bg-blue-700"
-                      >
-                        <Camera size={20} />
-                      </button>
-                    </div>
-                    <div className="ml-6">
-                      <h3 className="text-lg font-medium">Dr. Sarah Johnson</h3>
-                      <p className="text-gray-600">Cardiologist</p>
-                    </div>
-                  </div>
+                  {profileData ? (
+                    // Render profile fields as non-editable with a pencil icon
+                    <form onSubmit={handleSubmit}>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        {/* Full Name */}
+                        <div>
+                          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                          <div className="relative">
+                            <input
+                              type="text"
+                              id="name"
+                              name="name"
+                              defaultValue={profileData.name}
+                              readOnly={!isEditable}
+                              className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''
+                                }`}
+                            />
+                            {!isEditable && (
+                              <Pencil
+                                className="absolute top-2 right-2 text-gray-500 cursor-pointer"
+                                onClick={handleEditClick}
+                              />
+                            )}
+                          </div>
+                        </div>
 
-                  <form onSubmit={(e) => e.preventDefault()}>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                      <div>
-                        <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                        <input 
-                          type="text"
-                          id="firstName" 
-                          name="firstName" 
-                          defaultValue="Sarah" 
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
+                        {/* Gender */}
+                        <div>
+                          <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                          <select
+                            id="gender"
+                            name="gender"
+                            defaultValue={profileData.gender}
+                            disabled={!isEditable}
+                            className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''
+                              }`}
+                          >
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
+                          </select>
+                        </div>
+
+                        {/* Age */}
+                        <div>
+                          <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-1">Age</label>
+                          <input
+                            type="number"
+                            id="age"
+                            name="age"
+                            defaultValue={profileData.age}
+                            readOnly={!isEditable}
+                            className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''
+                              }`}
+                          />
+                        </div>
+
+                        {/* Years of Experience */}
+                        <div>
+                          <label htmlFor="experience_in_years" className="block text-sm font-medium text-gray-700 mb-1">Years of Experience</label>
+                          <input
+                            type="number"
+                            id="experience_in_years"
+                            name="experience_in_years"
+                            defaultValue={profileData.experience_in_years}
+                            readOnly={!isEditable}
+                            className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''
+                              }`}
+                          />
+                        </div>
+
+                        {/* Languages */}
+                        <div>
+                          <label htmlFor="language" className="block text-sm font-medium text-gray-700 mb-1">Languages</label>
+                          <input
+                            type="text"
+                            id="language"
+                            name="language"
+                            defaultValue={profileData.language}
+                            readOnly={!isEditable}
+                            className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''
+                              }`}
+                          />
+                        </div>
+
+                        {/* Designation */}
+                        <div>
+                          <label htmlFor="designation" className="block text-sm font-medium text-gray-700 mb-1">Designation</label>
+                          <input
+                            type="text"
+                            id="designation"
+                            name="designation"
+                            defaultValue={profileData.designation}
+                            readOnly={!isEditable}
+                            className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''
+                              }`}
+                          />
+                        </div>
+                        {/* Dynamic Education Section */}
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Education</label>
+                          {educationFields.length > 0 ? (
+                            educationFields.map((field, index) => (
+                              <div key={index} className="flex gap-4 mb-2">
+                                <input
+                                  type="text"
+                                  placeholder="Degree"
+                                  value={field.degree || ''}
+                                  readOnly={!isEditable}
+                                  onChange={(e) => handleFieldChange(index, 'degree', e.target.value, setEducationFields, educationFields)}
+                                  className={`w-1/2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                                />
+                                <input
+                                  type="text"
+                                  placeholder="Institution"
+                                  value={field.institution || ''}
+                                  readOnly={!isEditable}
+                                  onChange={(e) => handleFieldChange(index, 'institution', e.target.value, setEducationFields, educationFields)}
+                                  className={`w-1/2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                                />
+                              </div>
+                            ))
+                          ) : (
+                            <p className="text-sm text-gray-500">No education details available.</p>
+                          )}
+                          <button
+                            type="button"
+                            disabled={!isEditable}
+                            onClick={() => handleAddField(setEducationFields, educationFields)}
+                            className={`text-blue-500 flex items-center  ${isEditable ? '' : 'cursor-not-allowed text-gray-500'}`}
+                          >
+                            <Plus className="mr-1" /> Add Education
+                          </button>
+                        </div>
+
+                        {/* Dynamic Experiences Section */}
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Experiences</label>
+                          {experienceFields.length > 0 ? (
+                            experienceFields.map((field, index) => (
+                              <div key={index} className="flex gap-4 mb-2">
+                                <input
+                                  type="text"
+                                  placeholder="Hospital"
+                                  value={field.hospital || ''}
+                                  onChange={(e) => handleFieldChange(index, 'hospital', e.target.value, setExperienceFields, experienceFields)}
+                                  className={`w-1/2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                                />
+                                <input
+                                  type="text"
+                                  placeholder="Duration"
+                                  value={field.duration || ''}
+                                  onChange={(e) => handleFieldChange(index, 'duration', e.target.value, setExperienceFields, experienceFields)}
+                                  className={`w-1/2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                                />
+                              </div>
+                            ))
+                          ) : (
+                            <p className="text-sm text-gray-500">No experience details available.</p>
+                          )}
+                          <button
+                            type="button"
+                            disabled={!isEditable}
+                            onClick={() => handleAddField(setExperienceFields, experienceFields)}
+                            className={`text-blue-500 flex items-center  ${isEditable ? '' : 'cursor-not-allowed text-gray-500'}`}
+                          >
+                            <Plus className="mr-1" /> Add Experience
+                          </button>
+                        </div>
+
+                        {/* Dynamic Awards Section */}
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Awards & Achievements</label>
+                          {awardFields.length > 0 ? (
+                            awardFields.map((field, index) => (
+                              <div key={index} className="flex gap-4 mb-2">
+                                <input
+                                  type="text"
+                                  placeholder={`Award ${field.key}`}
+                                  value={field.value || ''}
+                                  onChange={(e) => {
+                                    const updatedAwards = [...awardFields];
+                                    updatedAwards[index].value = e.target.value;
+                                    setAwardFields(updatedAwards);
+                                  }}
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                              </div>
+                            ))
+                          ) : (
+                            <p className="text-sm text-gray-500">No awards or achievements available.</p>
+                          )}
+                          <button
+                            type="button"
+                            disabled={!isEditable}
+                            onClick={() => {
+                              const newKey = awardFields.length + 1;
+                              setAwardFields([...awardFields, { key: newKey, value: '' }]);
+                            }}
+                            className={`text-blue-500 flex items-center  ${isEditable ? '' : 'cursor-not-allowed text-gray-500'}`}
+                          >
+                            <Plus className="mr-1" /> Add Award
+                          </button>
+                        </div>
+
+                        {/* License Number */}
+                        <div>
+                          <label htmlFor="license_number" className="block text-sm font-medium text-gray-700 mb-1">License Number</label>
+                          <input
+                            type="text"
+                            id="license_number"
+                            name="license_number"
+                            defaultValue={profileData?.license_number}
+                            readOnly={!isEditable}
+                            className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''
+                              }`}
+                          />
+                        </div>
+
+                        {/* License Image */}
+                        <div>
+                          <label htmlFor="license_image" className="block text-sm font-medium text-gray-700 mb-1">License Image</label>
+                          {profileData?.license_image && (
+                            <img
+                              src={profileData?.license_image}
+                              alt="License"
+                              className="w-32 h-32 object-cover rounded-md mb-2"
+                            />
+                          )}
+                          {isEditable && (
+                            <input
+                              type="file"
+                              id="license_image"
+                              name="license_image"
+                              accept="image/*"
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                          )}
+                        </div>
+
+                        {/* Profile Image */}
+                        <div>
+                          <label htmlFor="profile_image" className="block text-sm font-medium text-gray-700 mb-1">Profile Image</label>
+                          {profileData.profile_image && (
+                            <img
+                              src={profileData.profile_image}
+                              alt="Profile"
+                              className="w-32 h-32 object-cover rounded-md mb-2"
+                            />
+                          )}
+                          {isEditable && (
+                            <input
+                              type="file"
+                              id="profile_image"
+                              name="profile_image"
+                              accept="image/*"
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                          )}
+                        </div>
                       </div>
-                      <div>
-                        <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-                        <input 
-                          type="text"
-                          id="lastName" 
-                          name="lastName" 
-                          defaultValue="Johnson" 
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
+
+                      {/* Save Changes Button */}
+                      {isEditable && (
+                        <div className="flex justify-end">
+                          <button
+                            type="submit"
+                            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          >
+                            Save Changes
+                          </button>
+                        </div>
+                      )}
+                    </form>
+                  ) : (
+                    // Render form to create a new profile
+                    <form onSubmit={handleSubmit}>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                          <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                          <select
+                            id="gender"
+                            name="gender"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          >
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-1">Age</label>
+                          <input
+                            type="number"
+                            id="age"
+                            name="age"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="experience_in_years" className="block text-sm font-medium text-gray-700 mb-1">Years of Experience</label>
+                          <input
+                            type="number"
+                            id="experience_in_years"
+                            name="experience_in_years"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="language" className="block text-sm font-medium text-gray-700 mb-1">Languages</label>
+                          <input
+                            type="text"
+                            id="language"
+                            name="language"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="designation" className="block text-sm font-medium text-gray-700 mb-1">Designation</label>
+                          <input
+                            type="text"
+                            id="designation"
+                            name="designation"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
                       </div>
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                        <input 
-                          type="email" 
-                          id="email" 
-                          name="email" 
-                          defaultValue="dr.sarah@example.com" 
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                        <input 
-                          type="tel" 
-                          id="phone" 
-                          name="phone" 
-                          defaultValue="+91 98765 43210" 
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="specialization" className="block text-sm font-medium text-gray-700 mb-1">Specialization</label>
-                        <select
-                          id="specialization" 
-                          name="specialization" 
-                          defaultValue="Cardiologist"
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      <div className="flex justify-end">
+                        <button
+                          type="submit"
+                          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         >
-                          <option>Cardiologist</option>
-                          <option>Dermatologist</option>
-                          <option>Neurologist</option>
-                          <option>Pediatrician</option>
-                          <option>Orthopedic</option>
-                        </select>
+                          Create Profile
+                        </button>
                       </div>
-                      <div>
-                        <label htmlFor="experience" className="block text-sm font-medium text-gray-700 mb-1">Years of Experience</label>
-                        <input 
-                          type="number" 
-                          id="experience" 
-                          name="experience" 
-                          defaultValue="12" 
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="mb-6">
-                      <label htmlFor="bio" className="block text-sm font-medium text-gray-700 mb-1">Professional Bio</label>
-                      <textarea 
-                        id="bio" 
-                        name="bio" 
-                        rows="4" 
-                        defaultValue="Dr. Sarah Johnson is a board-certified cardiologist with over 12 years of experience in diagnosing and treating heart conditions. She specializes in preventive cardiology and heart failure management."
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                    </div>
-
-                    <div className="flex justify-end">
-                      <button 
-                        type="submit" 
-                        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      >
-                        Save Changes
-                      </button>
-                    </div>
-                  </form>
+                    </form>
+                  )}
                 </div>
               </div>
             )}
@@ -280,59 +630,59 @@ const DoctorSettings = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                       <div>
                         <label htmlFor="accountName" className="block text-sm font-medium text-gray-700 mb-1">Account Holder Name</label>
-                        <input 
+                        <input
                           type="text"
-                          id="accountName" 
-                          name="accountName" 
-                          defaultValue="Dr. Sarah Johnson" 
+                          id="accountName"
+                          name="accountName"
+                          defaultValue="Dr. Sarah Johnson"
                           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                       </div>
                       <div>
                         <label htmlFor="accountNumber" className="block text-sm font-medium text-gray-700 mb-1">Account Number</label>
-                        <input 
+                        <input
                           type="text"
-                          id="accountNumber" 
-                          name="accountNumber" 
-                          defaultValue="XXXX XXXX XXXX 4567" 
+                          id="accountNumber"
+                          name="accountNumber"
+                          defaultValue="XXXX XXXX XXXX 4567"
                           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                       </div>
                       <div>
                         <label htmlFor="bankName" className="block text-sm font-medium text-gray-700 mb-1">Bank Name</label>
-                        <input 
+                        <input
                           type="text"
-                          id="bankName" 
-                          name="bankName" 
-                          defaultValue="HDFC Bank" 
+                          id="bankName"
+                          name="bankName"
+                          defaultValue="HDFC Bank"
                           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                       </div>
                       <div>
                         <label htmlFor="ifscCode" className="block text-sm font-medium text-gray-700 mb-1">IFSC Code</label>
-                        <input 
+                        <input
                           type="text"
-                          id="ifscCode" 
-                          name="ifscCode" 
-                          defaultValue="HDFC0001234" 
+                          id="ifscCode"
+                          name="ifscCode"
+                          defaultValue="HDFC0001234"
                           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                       </div>
                       <div>
                         <label htmlFor="branch" className="block text-sm font-medium text-gray-700 mb-1">Branch</label>
-                        <input 
+                        <input
                           type="text"
-                          id="branch" 
-                          name="branch" 
-                          defaultValue="Andheri East, Mumbai" 
+                          id="branch"
+                          name="branch"
+                          defaultValue="Andheri East, Mumbai"
                           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                       </div>
                       <div>
                         <label htmlFor="accountType" className="block text-sm font-medium text-gray-700 mb-1">Account Type</label>
                         <select
-                          id="accountType" 
-                          name="accountType" 
+                          id="accountType"
+                          name="accountType"
                           defaultValue="Savings"
                           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         >
@@ -344,18 +694,18 @@ const DoctorSettings = () => {
 
                     <div className="mb-6">
                       <label htmlFor="panNumber" className="block text-sm font-medium text-gray-700 mb-1">PAN Number</label>
-                      <input 
+                      <input
                         type="text"
-                        id="panNumber" 
-                        name="panNumber" 
-                        defaultValue="ABCDE1234F" 
+                        id="panNumber"
+                        name="panNumber"
+                        defaultValue="ABCDE1234F"
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
 
                     <div className="flex justify-end">
-                      <button 
-                        type="submit" 
+                      <button
+                        type="submit"
                         className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                       >
                         Save Changes
@@ -380,54 +730,54 @@ const DoctorSettings = () => {
                         <p className="text-sm text-gray-500">Receive emails about appointment bookings</p>
                       </div>
                       <div className="relative inline-flex items-center cursor-pointer" onClick={() => handleToggle('email')}>
-                        <input 
-                          type="checkbox" 
-                          className="sr-only peer" 
+                        <input
+                          type="checkbox"
+                          className="sr-only peer"
                           checked={notifications.email}
                         />
                         <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center justify-between">
                       <div>
                         <h3 className="font-medium">SMS Notifications</h3>
                         <p className="text-sm text-gray-500">Receive SMS alerts for upcoming appointments</p>
                       </div>
                       <div className="relative inline-flex items-center cursor-pointer" onClick={() => handleToggle('sms')}>
-                        <input 
-                          type="checkbox" 
-                          className="sr-only peer" 
+                        <input
+                          type="checkbox"
+                          className="sr-only peer"
                           checked={notifications.sms}
                         />
                         <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center justify-between">
                       <div>
                         <h3 className="font-medium">Push Notifications</h3>
                         <p className="text-sm text-gray-500">Receive push notifications on your device</p>
                       </div>
                       <div className="relative inline-flex items-center cursor-pointer" onClick={() => handleToggle('push')}>
-                        <input 
-                          type="checkbox" 
-                          className="sr-only peer" 
+                        <input
+                          type="checkbox"
+                          className="sr-only peer"
                           checked={notifications.push}
                         />
                         <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center justify-between">
                       <div>
                         <h3 className="font-medium">Marketing Updates</h3>
                         <p className="text-sm text-gray-500">Receive updates about new features and services</p>
                       </div>
                       <div className="relative inline-flex items-center cursor-pointer" onClick={() => handleToggle('marketing')}>
-                        <input 
-                          type="checkbox" 
-                          className="sr-only peer" 
+                        <input
+                          type="checkbox"
+                          className="sr-only peer"
                           checked={notifications.marketing}
                         />
                         <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
@@ -452,13 +802,13 @@ const DoctorSettings = () => {
                         <div className="relative">
                           <label htmlFor="currentPassword" className="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
                           <div className="relative">
-                            <input 
-                              type={showPassword ? "text" : "password"} 
-                              id="currentPassword" 
-                              name="currentPassword" 
+                            <input
+                              type={showPassword ? "text" : "password"}
+                              id="currentPassword"
+                              name="currentPassword"
                               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
                             />
-                            <button 
+                            <button
                               type="button"
                               className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
                               onClick={() => setShowPassword(!showPassword)}
@@ -467,17 +817,17 @@ const DoctorSettings = () => {
                             </button>
                           </div>
                         </div>
-                        
+
                         <div className="relative">
                           <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700 mb-1">New Password</label>
                           <div className="relative">
-                            <input 
-                              type={showNewPassword ? "text" : "password"} 
-                              id="newPassword" 
-                              name="newPassword" 
+                            <input
+                              type={showNewPassword ? "text" : "password"}
+                              id="newPassword"
+                              name="newPassword"
                               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
                             />
-                            <button 
+                            <button
                               type="button"
                               className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
                               onClick={() => setShowNewPassword(!showNewPassword)}
@@ -486,17 +836,17 @@ const DoctorSettings = () => {
                             </button>
                           </div>
                         </div>
-                        
+
                         <div className="relative">
                           <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
                           <div className="relative">
-                            <input 
-                              type={showConfirmPassword ? "text" : "password"} 
-                              id="confirmPassword" 
-                              name="confirmPassword" 
+                            <input
+                              type={showConfirmPassword ? "text" : "password"}
+                              id="confirmPassword"
+                              name="confirmPassword"
                               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
                             />
-                            <button 
+                            <button
                               type="button"
                               className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
                               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
@@ -506,16 +856,16 @@ const DoctorSettings = () => {
                           </div>
                         </div>
                       </div>
-                      
-                      <button 
-                        type="submit" 
+
+                      <button
+                        type="submit"
                         className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                       >
                         Update Password
                       </button>
                     </form>
                   </div>
-                  
+
                 </div>
               </div>
             )}
