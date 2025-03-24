@@ -68,7 +68,7 @@ const MedicineAndLabs = () => {
         if (window.confirm('Are you sure you want to delete this test?')) {
             setIsDeletingTest(prev => [...prev, id]);
             try {
-                await doctorProfileApi.deleteDoctorTest({ id });
+                await doctorProfileApi.deleteDoctorTest({ test_detail: [id] });
                 setTests(tests.filter(test => test.id !== id));
             } catch (error) {
                 console.error('Error deleting test:', error);
@@ -344,7 +344,7 @@ const MedicineAndLabs = () => {
               <td className="border border-gray-200 px-4 py-2">₹{test.price || '-'}</td>
               <td className="border border-gray-200 px-4 py-2 text-center">
                 <button
-                  onClick={() => handleDeleteTest({test_detail:[test.id]})}
+                  onClick={() => handleDeleteTest(test.id)}
                   disabled={isDeletingTest.includes(test.id)}
                   className="text-red-500 hover:text-red-700 p-2 hover:bg-red-50 rounded-full disabled:opacity-50"
                 >
