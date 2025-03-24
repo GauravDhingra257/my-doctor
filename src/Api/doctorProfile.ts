@@ -54,6 +54,7 @@ const doctorProfileApi = {
   deleteDoctorSpeciality: (data: SpecialityData): Promise<AxiosResponse> => apiClient.delete('/doctor/doctor-speciality', { data }),
   postDoctorTest: (data: any): Promise<AxiosResponse> => apiClient.post('/doctor/doctor-test', data),
   deleteDoctorTest: (data: TestDetailData): Promise<AxiosResponse> => apiClient.delete('/doctor/doctor-test', { data }),
+  getDoctorTest: (): Promise<AxiosResponse> => apiClient.get('/doctor/doctor-test'),
   postDoctorMedicines: (data: MedicineData): Promise<AxiosResponse> => apiClient.post('/doctor/doctor-medicines', data),
   patchDoctorMedicines: (data: any): Promise<AxiosResponse> => apiClient.patch('/doctor/doctor-medicines', data),
   getDoctorMedicines: (params: { doctor_profile: string }): Promise<AxiosResponse> => apiClient.get('/doctor/doctor-medicines', { params }),

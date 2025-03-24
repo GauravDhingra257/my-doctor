@@ -93,16 +93,21 @@ const MedicineAndLabs = () => {
         }
     };
     useEffect(() => {
-        fetchMedicines();
+        fetchMedicinesAndTests();
     }, []);
-
-    const fetchMedicines = async () => {
+    
+    const fetchMedicinesAndTests = async () => {
         setIsLoading(true);
         try {
-            const response = await doctorProfileApi.getDoctorMedicines({ doctor_profile: 'doctor_id' });
-            setMedicines(response.data);
+            // Fetch medicines
+            const medicinesResponse = await doctorProfileApi.getDoctorMedicines({ doctor_profile: 'doctor_id' });
+            setMedicines(medicinesResponse.data);
+    
+            // Fetch tests
+            const testsResponse = await doctorProfileApi.getDoctorTest();
+            setTests(testsResponse.data);
         } catch (error) {
-            console.error('Error fetching medicines:', error);
+            console.error('Error fetching medicines or tests:', error);
         } finally {
             setIsLoading(false);
         }
@@ -339,7 +344,7 @@ const MedicineAndLabs = () => {
               <td className="border border-gray-200 px-4 py-2">₹{test.price || '-'}</td>
               <td className="border border-gray-200 px-4 py-2 text-center">
                 <button
-                  onClick={() => handleDeleteTest(test.id)}
+                  onClick={() => handleDeleteTest({test_detail:[test.id]})}
                   disabled={isDeletingTest.includes(test.id)}
                   className="text-red-500 hover:text-red-700 p-2 hover:bg-red-50 rounded-full disabled:opacity-50"
                 >
