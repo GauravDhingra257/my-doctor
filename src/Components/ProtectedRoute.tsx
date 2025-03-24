@@ -8,11 +8,10 @@ interface JwtPayload {
   exp: number;
 }
 
-export const isDoctor = (): boolean => {
-  // const { isDoctor } = docStore();
+export const isDoctorHelper = ():any => {
   // if(isDoctor) return true;
   const token = localStorage.getItem('accessToken');
-  if (!token) return false;
+  if (!token) return [false,null];
 
   try {
     const decoded = jwtDecode<JwtPayload>(token);
@@ -20,27 +19,30 @@ export const isDoctor = (): boolean => {
     if (decoded.exp < currentTime) {
       console.error('Token has expired');
       localStorage.removeItem('accessToken');
-      return false;
+      return [false,decoded];
     }
-    return decoded.user_type === 2;
+    return [decoded.user_type === 2,decoded];
   } catch (error) {
     console.error('Invalid token:', error);
     localStorage.removeItem('accessToken');
-    return false;
+    return [false,null]
   }
 };
 interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 export const ProtectedRouteV2: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const { setIsDoctor } = docStore();
+  const { isDoctor,setIsDoctor,setDoctorDecodedJwt } = docStore();
+  let isDoctorFlag, decoded
   useEffect(() => {
     console.log('ProtectedRoutev2');
-    if(isDoctor()){
+    [isDoctorFlag, decoded] = isDoctorHelper();
+    if (isDoctorFlag) {
     setIsDoctor(true);
+    setDoctorDecodedJwt(decoded);
     }
   },[]);
-  if (isDoctor()) {
+  if (isDoctor) {
     return  <Navigate to="/dashboard" />;;
   }
 
@@ -48,15 +50,17 @@ export const ProtectedRouteV2: React.FC<ProtectedRouteProps> = ({ children }) =>
 };
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const { setIsDoctor } = docStore();
+  const { isDoctor,setIsDoctor ,setDoctorDecodedJwt} = docStore();
+  let isDoctorFlag, decoded
   useEffect(() => {
     console.log('ProtectedRoute');
-    if(isDoctor()){
+    [isDoctorFlag, decoded] = isDoctorHelper();
+    if(isDoctorFlag){
     setIsDoctor(true);
+    setDoctorDecodedJwt(decoded);
     }
   },[]);
-  if (isDoctor()) {
-    
+  if (isDoctor) {
     return <>{children}</>;
   }
 

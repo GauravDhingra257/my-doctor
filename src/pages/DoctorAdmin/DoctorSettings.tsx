@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Camera, Check, Info, Lock, Eye, EyeOff, Plus, Pencil } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { doctorProfileApi } from '../../Api';
+import { doctorProfileApi, doctorUserApi } from '../../Api';
 import { form } from '@heroui/react';
 import MedicineAndLabs from './MedicineAndLabs';
+import docStore from '../../docStore/docStore';
 
 const DoctorSettings = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const DoctorSettings = () => {
   const [awardFields, setAwardFields] = useState([]);
   const [profileData, setProfileData] = useState(null);
   const [isEditable, setIsEditable] = useState(false);
+  const {doctordecodedjwt}=docStore()
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -966,73 +968,108 @@ const DoctorSettings = () => {
                 <div className="p-6">
                   <div className="mb-8">
                     <h3 className="text-md font-medium mb-4">Change Password</h3>
-                    <form onSubmit={(e) => e.preventDefault()}>
-                      <div className="space-y-4 mb-6">
-                        <div className="relative">
-                          <label htmlFor="currentPassword" className="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
-                          <div className="relative">
-                            <input
-                              type={showPassword ? "text" : "password"}
-                              id="currentPassword"
-                              name="currentPassword"
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
-                            />
-                            <button
-                              type="button"
-                              className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
-                              onClick={() => setShowPassword(!showPassword)}
-                            >
-                              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                            </button>
-                          </div>
-                        </div>
+                    <form
+  onSubmit={async (e) => {
+    e.preventDefault();
 
-                        <div className="relative">
-                          <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700 mb-1">New Password</label>
-                          <div className="relative">
-                            <input
-                              type={showNewPassword ? "text" : "password"}
-                              id="newPassword"
-                              name="newPassword"
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
-                            />
-                            <button
-                              type="button"
-                              className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
-                              onClick={() => setShowNewPassword(!showNewPassword)}
-                            >
-                              {showNewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                            </button>
-                          </div>
-                        </div>
+    const formData = new FormData(e.target as HTMLFormElement);
+    const currentPassword = formData.get("currentPassword") as string;
+    const newPassword = formData.get("newPassword") as string;
+    const confirmPassword = formData.get("confirmPassword") as string;
 
-                        <div className="relative">
-                          <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
-                          <div className="relative">
-                            <input
-                              type={showConfirmPassword ? "text" : "password"}
-                              id="confirmPassword"
-                              name="confirmPassword"
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
-                            />
-                            <button
-                              type="button"
-                              className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
-                              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                            >
-                              {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                            </button>
-                          </div>
-                        </div>
-                      </div>
+    if (newPassword !== confirmPassword) {
+      alert("New password and confirm password do not match.");
+      return;
+    }
 
-                      <button
-                        type="submit"
-                        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      >
-                        Update Password
-                      </button>
-                    </form>
+    try {
+      const response = await doctorUserApi.patchDoctorLogin({
+        current_password: currentPassword,
+        new_password: newPassword,
+        new_password2: confirmPassword,
+        user_type:doctordecodedjwt.user_type
+      });
+      console.log("Password updated successfully:", response.data);
+      alert("Password updated successfully.");
+      e.target.reset(); // Reset the form after successful submission
+    } catch (error) {
+      console.error("Error updating password:", error);
+      alert("Error updating password. Please try again.");
+    }
+  }}
+>
+  <div className="space-y-4 mb-6">
+    <div className="relative">
+      <label htmlFor="currentPassword" className="block text-sm font-medium text-gray-700 mb-1">
+        Current Password
+      </label>
+      <div className="relative">
+        <input
+          type={showPassword ? "text" : "password"}
+          id="currentPassword"
+          name="currentPassword"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
+        />
+        <button
+          type="button"
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+        </button>
+      </div>
+    </div>
+
+    <div className="relative">
+      <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700 mb-1">
+        New Password
+      </label>
+      <div className="relative">
+        <input
+          type={showNewPassword ? "text" : "password"}
+          id="newPassword"
+          name="newPassword"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
+        />
+        <button
+          type="button"
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
+          onClick={() => setShowNewPassword(!showNewPassword)}
+        >
+          {showNewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+        </button>
+      </div>
+    </div>
+
+    <div className="relative">
+      <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+        Confirm New Password
+      </label>
+      <div className="relative">
+        <input
+          type={showConfirmPassword ? "text" : "password"}
+          id="confirmPassword"
+          name="confirmPassword"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
+        />
+        <button
+          type="button"
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
+          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+        >
+          {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  >
+    Update Password
+  </button>
+</form>
                   </div>
 
                 </div>
