@@ -175,7 +175,7 @@ const DoctorSettings = () => {
                   <div className="relative">
                     {profileData?.profile_image ? (
                       <img
-                        src={profileData.profile_image}
+                        src={profileData?.profile_image}
                         alt="Profile"
                         className="w-24 h-24 object-cover rounded-full border-2 border-blue-500"
                       />
@@ -184,7 +184,7 @@ const DoctorSettings = () => {
                         <Camera className="h-8 w-8" />
                       </div>
                     )}
-                    {isEditable && (
+                    {isEditable || profileData==null && (
                       <label
                         htmlFor="profile_image"
                         className="absolute bottom-0 right-0 bg-blue-500 text-white p-1 rounded-full cursor-pointer"
@@ -225,7 +225,7 @@ const DoctorSettings = () => {
                               type="text"
                               id="name"
                               name="name"
-                              defaultValue={profileData.name}
+                              defaultValue={profileData?.name}
                               readOnly={!isEditable}
                               className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''
                                 }`}
@@ -245,7 +245,7 @@ const DoctorSettings = () => {
                           <select
                             id="gender"
                             name="gender"
-                            defaultValue={profileData.gender}
+                            defaultValue={profileData?.gender}
                             disabled={!isEditable}
                             className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''
                               }`}
@@ -262,7 +262,7 @@ const DoctorSettings = () => {
                             type="number"
                             id="age"
                             name="age"
-                            defaultValue={profileData.age}
+                            defaultValue={profileData?.age}
                             readOnly={!isEditable}
                             className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''
                               }`}
@@ -276,7 +276,7 @@ const DoctorSettings = () => {
                             type="number"
                             id="experience_in_years"
                             name="experience_in_years"
-                            defaultValue={profileData.experience_in_years}
+                            defaultValue={profileData?.experience_in_years}
                             readOnly={!isEditable}
                             className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''
                               }`}
@@ -290,7 +290,7 @@ const DoctorSettings = () => {
                             type="text"
                             id="language"
                             name="language"
-                            defaultValue={profileData.language}
+                            defaultValue={profileData?.language}
                             readOnly={!isEditable}
                             className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''
                               }`}
@@ -304,7 +304,7 @@ const DoctorSettings = () => {
                             type="text"
                             id="designation"
                             name="designation"
-                            defaultValue={profileData.designation}
+                            defaultValue={profileData?.designation}
                             readOnly={!isEditable}
                             className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''
                               }`}
@@ -455,9 +455,9 @@ const DoctorSettings = () => {
                         {/* Profile Image */}
                         <div>
                           <label htmlFor="profile_image" className="block text-sm font-medium text-gray-700 mb-1">Profile Image</label>
-                          {profileData.profile_image && (
+                          {profileData?.profile_image && (
                             <img
-                              src={profileData.profile_image}
+                              src={profileData?.profile_image}
                               alt="Profile"
                               className="w-32 h-32 object-cover rounded-md mb-2"
                             />
@@ -547,6 +547,168 @@ const DoctorSettings = () => {
                           />
                         </div>
                       </div>
+                                              {/* Dynamic Education Section */}
+                                              <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Education</label>
+                          {educationFields.length > 0 ? (
+                            educationFields.map((field, index) => (
+                              <div key={index} className="flex gap-4 mb-2">
+                                <input
+                                  type="text"
+                                  placeholder="Degree"
+                                  value={field.degree || ''}
+                                  readOnly={!isEditable}
+                                  onChange={(e) => handleFieldChange(index, 'degree', e.target.value, setEducationFields, educationFields)}
+                                  className={`w-1/2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                                />
+                                <input
+                                  type="text"
+                                  placeholder="Institution"
+                                  value={field.institution || ''}
+                                  readOnly={!isEditable}
+                                  onChange={(e) => handleFieldChange(index, 'institution', e.target.value, setEducationFields, educationFields)}
+                                  className={`w-1/2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                                />
+                              </div>
+                            ))
+                          ) : (
+                            <p className="text-sm text-gray-500">No education details available.</p>
+                          )}
+                          <button
+                            type="button"
+                            disabled={!isEditable}
+                            onClick={() => handleAddField(setEducationFields, educationFields)}
+                            className={`text-blue-500 flex items-center  ${isEditable ? '' : 'cursor-not-allowed text-gray-500'}`}
+                          >
+                            <Plus className="mr-1" /> Add Education
+                          </button>
+                        </div>
+
+                        {/* Dynamic Experiences Section */}
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Experiences</label>
+                          {experienceFields.length > 0 ? (
+                            experienceFields.map((field, index) => (
+                              <div key={index} className="flex gap-4 mb-2">
+                                <input
+                                  type="text"
+                                  placeholder="Hospital"
+                                  value={field.hospital || ''}
+                                  onChange={(e) => handleFieldChange(index, 'hospital', e.target.value, setExperienceFields, experienceFields)}
+                                  className={`w-1/2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                                />
+                                <input
+                                  type="text"
+                                  placeholder="Duration"
+                                  value={field.duration || ''}
+                                  onChange={(e) => handleFieldChange(index, 'duration', e.target.value, setExperienceFields, experienceFields)}
+                                  className={`w-1/2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                                />
+                              </div>
+                            ))
+                          ) : (
+                            <p className="text-sm text-gray-500">No experience details available.</p>
+                          )}
+                          <button
+                            type="button"
+                            disabled={!isEditable}
+                            onClick={() => handleAddField(setExperienceFields, experienceFields)}
+                            className={`text-blue-500 flex items-center  ${isEditable ? '' : 'cursor-not-allowed text-gray-500'}`}
+                          >
+                            <Plus className="mr-1" /> Add Experience
+                          </button>
+                        </div>
+
+                        {/* Dynamic Awards Section */}
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Awards & Achievements</label>
+                          {awardFields.length > 0 ? (
+                            awardFields.map((field, index) => (
+                              <div key={index} className="flex gap-4 mb-2">
+                                <input
+                                  type="text"
+                                  placeholder={`Award ${field.key}`}
+                                  value={field.value || ''}
+                                  onChange={(e) => {
+                                    const updatedAwards = [...awardFields];
+                                    updatedAwards[index].value = e.target.value;
+                                    setAwardFields(updatedAwards);
+                                  }}
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                              </div>
+                            ))
+                          ) : (
+                            <p className="text-sm text-gray-500">No awards or achievements available.</p>
+                          )}
+                          <button
+                            type="button"
+                            disabled={!isEditable}
+                            onClick={() => {
+                              const newKey = awardFields.length + 1;
+                              setAwardFields([...awardFields, { key: newKey, value: '' }]);
+                            }}
+                            className={`text-blue-500 flex items-center  ${isEditable ? '' : 'cursor-not-allowed text-gray-500'}`}
+                          >
+                            <Plus className="mr-1" /> Add Award
+                          </button>
+                        </div>
+
+                        {/* License Number */}
+                        <div>
+                          <label htmlFor="license_number" className="block text-sm font-medium text-gray-700 mb-1">License Number</label>
+                          <input
+                            type="text"
+                            id="license_number"
+                            name="license_number"
+                            defaultValue={profileData?.license_number}
+                            readOnly={!isEditable}
+                            className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${!isEditable ? 'bg-gray-100 cursor-not-allowed' : ''
+                              }`}
+                          />
+                        </div>
+
+                        {/* License Image */}
+                        <div>
+                          <label htmlFor="license_image" className="block text-sm font-medium text-gray-700 mb-1">License Image</label>
+                          {profileData?.license_image && (
+                            <img
+                              src={profileData?.license_image}
+                              alt="License"
+                              className="w-32 h-32 object-cover rounded-md mb-2"
+                            />
+                          )}
+                          {isEditable && (
+                            <input
+                              type="file"
+                              id="license_image"
+                              name="license_image"
+                              accept="image/*"
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                          )}
+                        </div>
+
+                        {/* Profile Image */}
+                        <div>
+                          <label htmlFor="profile_image" className="block text-sm font-medium text-gray-700 mb-1">Profile Image</label>
+                          {profileData?.profile_image && (
+                            <img
+                              src={profileData?.profile_image}
+                              alt="Profile"
+                              className="w-32 h-32 object-cover rounded-md mb-2"
+                            />
+                          )}
+                          {isEditable && (
+                            <input
+                              type="file"
+                              id="profile_image"
+                              name="profile_image"
+                              accept="image/*"
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                          )}
+                        </div>
                       <div className="flex justify-end">
                         <button
                           type="submit"
