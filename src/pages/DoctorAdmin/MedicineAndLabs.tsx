@@ -134,6 +134,12 @@ const MedicineAndLabs = () => {
     };
 
     return (
+                      <div className="bg-white rounded-lg shadow-sm border p-6">
+
+                        <div className="p-6 border-b border-gray-200">
+                          <h2 className="text-lg font-medium text-gray-800">Medicine and Labs</h2>
+                        </div>
+                        <div className="p-6"></div>
 <div className="max-w-4xl mx-auto">
   {/* Add Medicine Modal */}
   <button
@@ -364,6 +370,7 @@ const MedicineAndLabs = () => {
       <p className="text-center text-gray-500 py-8">No tests added yet</p>
     )}
   </div>
+</div>
 </div>
     );
 };
