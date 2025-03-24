@@ -186,7 +186,7 @@ const DoctorSettings = () => {
                         <Camera className="h-8 w-8" />
                       </div>
                     )}
-                    {isEditable || profileData==null && (
+                    {(isEditable || profileData==null) && (
                       <label
                         htmlFor="profile_image"
                         className="absolute bottom-0 right-0 bg-blue-500 text-white p-1 rounded-full cursor-pointer"
@@ -436,13 +436,6 @@ const DoctorSettings = () => {
                         {/* License Image */}
                         <div>
                           <label htmlFor="license_image" className="block text-sm font-medium text-gray-700 mb-1">License Image</label>
-                          {profileData?.license_image && (
-                            <img
-                              src={profileData?.license_image}
-                              alt="License"
-                              className="w-32 h-32 object-cover rounded-md mb-2"
-                            />
-                          )}
                           {isEditable && (
                             <input
                               type="file"
@@ -457,13 +450,6 @@ const DoctorSettings = () => {
                         {/* Profile Image */}
                         <div>
                           <label htmlFor="profile_image" className="block text-sm font-medium text-gray-700 mb-1">Profile Image</label>
-                          {profileData?.profile_image && (
-                            <img
-                              src={profileData?.profile_image}
-                              alt="Profile"
-                              className="w-32 h-32 object-cover rounded-md mb-2"
-                            />
-                          )}
                           {isEditable && (
                             <input
                               type="file"
