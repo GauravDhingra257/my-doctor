@@ -42,6 +42,16 @@ const DoctorSettings = () => {
                   Profile Information
                 </button>
                 <button
+                  onClick={() => handleTabClick("clinic")}
+                  className={`text-left px-4 py-2 rounded ${
+                    activeTab === "clinic"
+                      ? "bg-blue-50 text-blue-600"
+                      : "hover:bg-gray-50"
+                  }`}
+                >
+                  Clinic
+                </button>
+                <button
                   onClick={() => handleTabClick("medicineAndLabs")}
                   className={`text-left px-4 py-2 rounded ${
                     activeTab === "medicineAndLabs"
@@ -98,6 +108,7 @@ const DoctorSettings = () => {
           {/* Tab Content */}
           <div className="lg:col-span-2">
             {activeTab === "profile" && <ProfileTab />}
+            {activeTab === "clinic" && <ClinicTab />}
             {activeTab === "medicineAndLabs" && <MedicineAndLabs />}
             {activeTab === "subscription" && <SubscriptionTab />}
             {activeTab === "bank" && <BankDetailsTab />}
@@ -950,6 +961,140 @@ const ProfileTab = () => {
             </div>
           </form>
         )}
+      </div>
+    </div>
+  );
+};
+  // clinic details
+const ClinicTab = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { doctordecodedjwt } = docStore();
+  return (
+    <div className="bg-white rounded-lg shadow-sm border">
+      <div className="p-6 border-b border-gray-200">
+        <h2 className="text-lg font-medium text-gray-800">Security Settings</h2>
+      </div>
+      <div className="p-6">
+        <div className="mb-8">
+          <h3 className="text-md font-medium mb-4">Change Password</h3>
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+
+              const formData = new FormData(e.target as HTMLFormElement);
+              const currentPassword = formData.get("currentPassword") as string;
+              const newPassword = formData.get("newPassword") as string;
+              const confirmPassword = formData.get("confirmPassword") as string;
+
+              if (newPassword !== confirmPassword) {
+                alert("New password and confirm password do not match.");
+                return;
+              }
+
+              try {
+                const response = await doctorUserApi.patchDoctorLogin({
+                  current_password: currentPassword,
+                  new_password: newPassword,
+                  new_password2: confirmPassword,
+                  user_type: doctordecodedjwt.user_type,
+                });
+                console.log("Password updated successfully:", response.data);
+                alert("Password updated successfully.");
+                e.target.reset(); // Reset the form after successful submission
+              } catch (error) {
+                console.error("Error updating password:", error);
+                alert("Error updating password. Please try again.");
+              }
+            }}
+          >
+            <div className="space-y-4 mb-6">
+              <div className="relative">
+                <label
+                  htmlFor="currentPassword"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Current Password
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="currentPassword"
+                    name="currentPassword"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
+                  />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
+              </div>
+
+              <div className="relative">
+                <label
+                  htmlFor="newPassword"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  New Password
+                </label>
+                <div className="relative">
+                  <input
+                    type={showNewPassword ? "text" : "password"}
+                    id="newPassword"
+                    name="newPassword"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
+                  />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                  >
+                    {showNewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
+              </div>
+
+              <div className="relative">
+                <label
+                  htmlFor="confirmPassword"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Confirm New Password
+                </label>
+                <div className="relative">
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
+                  />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    {showConfirmPassword ? (
+                      <EyeOff size={18} />
+                    ) : (
+                      <Eye size={18} />
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              Update Password
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

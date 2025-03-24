@@ -22,15 +22,49 @@ function App() {
         <div>
           <Navbar />
           <Routes>
-            
-            <Route path="/" element={<ProtectedRouteV2><Hero /></ProtectedRouteV2>} />
+            <Route
+              path="/"
+              element={
+                <ProtectedRouteV2>
+                  <Hero />
+                </ProtectedRouteV2>
+              }
+            />
             {/* <Route path="/services" element={<Services />} /> */}
-            <Route path="/doctors" element={<ProtectedRouteV2><Doctors /></ProtectedRouteV2>} />
-            <Route path="/doctors/:id" element={<ProtectedRouteV2><DoctorProfile /></ProtectedRouteV2>} />
-            <Route path="/signin" element={<ProtectedRouteV2><SignIn /></ProtectedRouteV2>} />
-            <Route path="/signup" element={<ProtectedRouteV2><SignUp /></ProtectedRouteV2>} />
-            <Route path="/services" element={<ProtectedRouteV2><ServicesPage /></ProtectedRouteV2>} />
-            
+            <Route
+              path="/doctors"
+              element={
+                <ProtectedRouteV2>
+                  <Doctors />
+                </ProtectedRouteV2>
+              }
+            />
+            <Route
+              path="/doctors/:id"
+              element={
+                <ProtectedRouteV2>
+                  <DoctorProfile />
+                </ProtectedRouteV2>
+              }
+            />
+            <Route
+              path="doctor/signin"
+              element={
+                <ProtectedRouteV2>
+                  <SignIn />
+                </ProtectedRouteV2>
+              }
+            />
+            <Route
+              path="doctor/signup"
+              element={
+                <ProtectedRouteV2>
+                  <SignUp />
+                </ProtectedRouteV2>
+              }
+            />
+            <Route path="/services" element={<ServicesPage />} />
+
             <Route
               path="/queue"
               element={
@@ -40,7 +74,7 @@ function App() {
               }
             />
             <Route
-              path="/dashboard"
+              path="doctor/dashboard"
               element={
                 <ProtectedRoute>
                   <DoctorDashboard />
@@ -48,7 +82,7 @@ function App() {
               }
             />
             <Route
-              path="/mypatients"
+              path="doctor/mypatients"
               element={
                 <ProtectedRoute>
                   <PatientsPage />
@@ -56,7 +90,7 @@ function App() {
               }
             />
             <Route
-              path="/payments"
+              path="doctor/payments"
               element={
                 <ProtectedRoute>
                   <PaymentsPage />
@@ -71,14 +105,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/subscriptions"
-              element={
-                <ProtectedRoute>
-                  <SubscriptionPage />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/subscriptions" element={<SubscriptionPage />} />
           </Routes>
           <Footer />
         </div>
